@@ -10,8 +10,8 @@ class playerStats:
     damageReduction = itemsInfo.ArmourDict[armour]["dmgRed"]
     minimumDamage = itemsInfo.SwordsDict[weapon]["minDps"]
     maximumDamage = itemsInfo.SwordsDict[weapon]["maxDps"]
-    # minimumDamage = 98172349872
-    # maximumDamage = 98172349872
+    # minimumDamage = 10000
+    # maximumDamage = 10001
     level = 1
     xp = 0 
 

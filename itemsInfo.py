@@ -58,180 +58,180 @@ dungeonSwords = [
 ]
 
 SwordsDict = {
-    grasslandSwords[0][0]: {
-        "minDps": grasslandSwords[0][1],
-        "maxDps": grasslandSwords[0][2],
-        "levelReq": grasslandSwords[0][3],
-        "price": grasslandSwords[0][4],
+    "Wooden Sword": {
+        "minDps": 4,
+        "maxDps": 7,
+        "levelReq": 1,
+        "price": 15,
     },
-    grasslandSwords[1][0]: {
-        "minDps": grasslandSwords[1][1],
-        "maxDps": grasslandSwords[1][2],
-        "levelReq": grasslandSwords[1][3],
-        "price": grasslandSwords[1][4]
+    "Rusty Iron Sword": {
+        "minDps": 7,
+        "maxDps": 12,
+        "levelReq": 3,
+        "price": 50
     },
-    grasslandSwords[2][0]: {
-        "minDps": grasslandSwords[2][1],
-        "maxDps": grasslandSwords[2][2],
-        "levelReq": grasslandSwords[2][3],
-        "price": grasslandSwords[2][4]
+    "Iron Shortsword": {
+        "minDps": 10,
+        "maxDps": 15,
+        "levelReq": 5,
+        "price": 120
     },
-    grasslandSwords[3][0]: {
-        "minDps": grasslandSwords[3][1],
-        "maxDps": grasslandSwords[3][2],
-        "levelReq": grasslandSwords[3][3],
-        "price": grasslandSwords[3][4]
+    "Steel Cutlass": {
+        "minDps": 12,
+        "maxDps": 18,
+        "levelReq": 7,
+        "price": 250
     },
-    grasslandSwords[4][0]: {
-        "minDps": grasslandSwords[4][1],
-        "maxDps": grasslandSwords[4][2],
-        "levelReq": grasslandSwords[4][3],
-        "price": grasslandSwords[4][4]
+    "Bandit's Saber": {
+        "minDps": 15,
+        "maxDps": 20,
+        "levelReq": 9,
+        "price": 400
     },
-    darkForestSword[0][0]: {
-        "minDps": darkForestSword[0][1],
-        "maxDps": darkForestSword[0][2],
-        "levelReq": darkForestSword[0][3],
-        "price": darkForestSword[0][4]
+    "Shadowfang Blade": {
+        "minDps": 18,
+        "maxDps": 22,
+        "levelReq": 11,
+        "price": 600
     },
-    darkForestSword[1][0]: {
-        "minDps": darkForestSword[1][1],
-        "maxDps": darkForestSword[1][2],
-        "levelReq": darkForestSword[1][3],
-        "price": darkForestSword[1][4]
+    "Venomous Rapier": {
+        "minDps": 20,
+        "maxDps": 25,
+        "levelReq": 13,
+        "price": 800
     },
-    darkForestSword[2][0]: {
-        "minDps": darkForestSword[2][1],
-        "maxDps": darkForestSword[2][2],
-        "levelReq": darkForestSword[2][3],
-        "price": darkForestSword[2][3]
+    "Treant Cleaver": {
+        "minDps": 22,
+        "maxDps": 28,
+        "levelReq": 15,
+        "price": 1000
     },
-    darkForestSword[3][0]: {
-        "minDps": darkForestSword[3][1],
-        "maxDps": darkForestSword[3][2],
-        "levelReq": darkForestSword[3][3],
-        "price": darkForestSword[3][4]
+    "Phantom Saber": {
+        "minDps": 25,
+        "maxDps": 30,
+        "levelReq": 17,
+        "price": 1400
     },
-    darkForestSword[4][0]: {
-        "minDps": darkForestSword[4][1],
-        "maxDps": darkForestSword[4][2],
-        "levelReq": darkForestSword[4][3],
-        "price": darkForestSword[4][4]
+    "Nightfang Greatsword": {
+        "minDps": 28,
+        "maxDps": 32,
+        "levelReq": 19,
+        "price": 1800
     },
-    frozenPeakSwords[0][0]: {
-        "minDps": frozenPeakSwords[0][1],
-        "maxDps": frozenPeakSwords[0][2],
-        "levelReq": frozenPeakSwords[0][3],
-        "price": frozenPeakSwords[0][4]
+    "Frostbite Blade": {
+        "minDps": 30,
+        "maxDps": 35,
+        "levelReq": 21,
+        "price": 2500
     },
-    frozenPeakSwords[1][0]: {
-        "minDps": frozenPeakSwords[1][1],
-        "maxDps": frozenPeakSwords[1][2],
-        "levelReq": frozenPeakSwords[1][3],
-        "price": frozenPeakSwords[1][4]
+    "Glacial Edge": {
+        "minDps": 32,
+        "maxDps": 38,
+        "levelReq": 23,
+        "price": 3200
     },
-    frozenPeakSwords[2][0]: {
-        "minDps": frozenPeakSwords[2][1],
-        "maxDps": frozenPeakSwords[2][2],
-        "levelReq": frozenPeakSwords[2][3],
-        "price": frozenPeakSwords[2][4]
+    "Avalanche Cleaver": {
+        "minDps": 35,
+        "maxDps": 40,
+        "levelReq": 25,
+        "price": 4000
     },
-    frozenPeakSwords[3][0]: {
-        "minDps": frozenPeakSwords[3][1],
-        "maxDps": frozenPeakSwords[3][2],
-        "levelReq": frozenPeakSwords[3][3],
-        "price": frozenPeakSwords[3][4]
+    "Stormbreaker Sword": {
+        "minDps": 38,
+        "maxDps": 42,
+        "levelReq": 27,
+        "price": 4800
     },
-    frozenPeakSwords[4][0]: {
-        "minDps": frozenPeakSwords[4][1],
-        "maxDps": frozenPeakSwords[4][2],
-        "levelReq": frozenPeakSwords[4][3],
-        "price": frozenPeakSwords[4][4]
+    "Frozen Fang": {
+        "minDps": 40,
+        "maxDps": 45,
+        "levelReq": 29,
+        "price": 5500
     },
-    lostCaveSwords[0][0]: {
-        "minDps": lostCaveSwords[0][1],
-        "maxDps": lostCaveSwords[0][2],
-        "levelReq": lostCaveSwords[0][3],
-        "price": lostCaveSwords[0][4]
+    "Stonecrusher Blade": {
+        "minDps": 42,
+        "maxDps": 48,
+        "levelReq": 31,
+        "price": 6000
     },
-    lostCaveSwords[1][0]: {
-        "minDps": lostCaveSwords[1][1],
-        "maxDps": lostCaveSwords[1][2],
-        "levelReq": lostCaveSwords[1][3],
-        "price": lostCaveSwords[1][4]
+    "Serpent Fang Dagger": {
+        "minDps": 45,
+        "maxDps": 50,
+        "levelReq": 33,
+        "price": 6800
     },
-    lostCaveSwords[2][0]: {
-        "minDps": lostCaveSwords[2][1],
-        "maxDps": lostCaveSwords[2][2],
-        "levelReq": lostCaveSwords[2][3],
-        "price": lostCaveSwords[2][4]
+    "Phantom Scimitar": {
+        "minDps": 48,
+        "maxDps": 52,
+        "levelReq": 35,
+        "price": 7500
     },
-    lostCaveSwords[3][0]: {
-        "minDps": lostCaveSwords[3][1],
-        "maxDps": lostCaveSwords[3][2],
-        "levelReq": lostCaveSwords[3][3],
-        "price": lostCaveSwords[3][4]
+    "Explorer's Katana": {
+        "minDps": 50,
+        "maxDps": 55,
+        "levelReq": 37,
+        "price": 8500
     },
-    lostCaveSwords[4][0]: {
-        "minDps": lostCaveSwords[4][1],
-        "maxDps": lostCaveSwords[4][2],
-        "levelReq": lostCaveSwords[4][3],
-        "price": lostCaveSwords[4][4]
+    "Crystal Cleaver": {
+        "minDps": 52,
+        "maxDps": 58,
+        "levelReq": 39,
+        "price": 9200
     },
-    burningWasteSwords[0][0]: {
-        "minDps": burningWasteSwords[0][1],
-        "maxDps": burningWasteSwords[0][2],
-        "levelReq": burningWasteSwords[0][3],
-        "price": burningWasteSwords[0][4]
+    "Infernal Saber": {
+        "minDps": 55,
+        "maxDps": 60,
+        "levelReq": 41,
+        "price": 10000
     },
-    burningWasteSwords[1][0]: {
-        "minDps": burningWasteSwords[1][1],
-        "maxDps": burningWasteSwords[1][2],
-        "levelReq": burningWasteSwords[1][3],
-        "price": burningWasteSwords[1][4]
+    "Molten Edge": {
+        "minDps": 58,
+        "maxDps": 62,
+        "levelReq": 43,
+        "price": 11500
     },
-    burningWasteSwords[2][0]: {
-        "minDps": burningWasteSwords[2][1],
-        "maxDps": burningWasteSwords[2][2],
-        "levelReq": burningWasteSwords[2][3],
-        "price": burningWasteSwords[2][4]
+    "Blazefang Sword": {
+        "minDps": 60,
+        "maxDps": 65,
+        "levelReq": 45,
+        "price": 13000
     },
-    burningWasteSwords[3][0]: {
-        "minDps": burningWasteSwords[3][1],
-        "maxDps": burningWasteSwords[3][2],
-        "levelReq": burningWasteSwords[3][3],
-        "price": burningWasteSwords[3][4]
+    "Hellfire Claymore": {
+        "minDps": 62,
+        "maxDps": 68,
+        "levelReq": 47,
+        "price": 15000
     },
-    burningWasteSwords[4][0]: {
-        "minDps": burningWasteSwords[4][1],
-        "maxDps": burningWasteSwords[4][2],
-        "levelReq": burningWasteSwords[4][3],
-        "price": burningWasteSwords[4][4]
+    "Demon's Wrath": {
+        "minDps": 65,
+        "maxDps": 70,
+        "levelReq": 49,
+        "price": 18000
     },
-    dungeonSwords[0][0]: {
-        "minDps": dungeonSwords[0][1],
-        "maxDps": dungeonSwords[0][2],
-        "levelReq": dungeonSwords[0][3]
+    "Blade fo teh Verdant Guardian": {
+        "minDps": 18,
+        "maxDps": 24,
+        "levelReq": 10
     },
-    dungeonSwords[1][0]: {
-        "minDps": dungeonSwords[1][1],
-        "maxDps": dungeonSwords[1][2],
-        "levelReq": dungeonSwords[1][3]
+    "Nightshade Fang": {
+        "minDps": 30,
+        "maxDps": 36,
+        "levelReq": 20
     },
-    dungeonSwords[2][0]: {
-        "minDps": dungeonSwords[2][1],
-        "maxDps": dungeonSwords[2][2],
-        "levelReq": dungeonSwords[2][3]
+    "Glacier's Bite": {
+        "minDps": 45,
+        "maxDps": 52,
+        "levelReq": 30
     },
-    dungeonSwords[3][0]: {
-        "minDps": dungeonSwords[3][1],
-        "maxDps": dungeonSwords[3][2],
-        "levelReq": dungeonSwords[3][3]
+    "Crystal Reaver": {
+        "minDps": 58,
+        "maxDps": 65,
+        "levelReq": 40
     },
-    dungeonSwords[4][0]: {
-        "minDps": dungeonSwords[4][1],
-        "maxDps": dungeonSwords[4][2],
-        "levelReq": dungeonSwords[4][3]
+    "Infernal Judgement": {
+        "minDps": 72,
+        "maxDps": 80,
+        "levelReq": 50
     }
 }
 
@@ -286,100 +286,100 @@ ArmourDict = {
         "levelReq": 0,
         "price": 0
     },
-    grasslandArmour[0][0]: {
-        "dmgRed": grasslandArmour[0][1],
-        "levelReq": grasslandArmour[0][2],
-        "price": grasslandArmour[0][3]
+    "Leather Vest": {
+        "dmgRed": 3,
+        "levelReq": 1,
+        "price": 50
     },
-    grasslandArmour[1][0]: {
-        "dmgRed": grasslandArmour[1][1],
-        "levelReq": grasslandArmour[1][2],
-        "price": grasslandArmour[1][3]
+    "ChainMail Shirt": {
+        "dmgRed": 6,
+        "levelReq": 5,
+        "price": 200
     },
-    grasslandArmour[2][0]: {
-        "dmgRed": grasslandArmour[2][1],
-        "levelReq": grasslandArmour[2][2],
-        "price": grasslandArmour[2][3]
+    "Iron Chestplate": {
+        "dmgRed": 9,
+        "levelReq": 9,
+        "price": 400
     },
-    darkForestArmour[0][0]: {
-        "dmgRed": darkForestArmour[0][1],
-        "levelReq": darkForestArmour[0][2],
-        "price": darkForestArmour[0][3]
+    "Shadow Cloak": {
+        "dmgRed": 12,
+        "levelReq": 11,
+        "price": 600
     },
-    darkForestArmour[1][0]: {
-        "dmgRed": darkForestArmour[1][1],
-        "levelReq": darkForestArmour[1][2],
-        "price": darkForestArmour[1][3]
+    "Reinforced Hide": {
+        "dmgRed": 16,
+        "levelReq": 15,
+        "price": 1000
     },
-    darkForestArmour[2][0]: {
-        "dmgRed": darkForestArmour[2][1],
-        "levelReq": darkForestArmour[2][2],
-        "price": darkForestArmour[2][3]
+    "Darksteel Cloak": {
+        "dmgRed": 20,
+        "levelReq": 19,
+        "price": 1500
     },
-    frozenPeakArmour[0][0]: {
-        "dmgRed": frozenPeakArmour[0][1],
-        "levelReq": frozenPeakArmour[0][2],
-        "price": frozenPeakArmour[0][3]
+    "Frostweave Coat": {
+        "dmgRed": 22,
+        "levelReq": 21,
+        "price": 2500
     },
-    frozenPeakArmour[1][0]: {
-        "dmgRed": frozenPeakArmour[1][1],
-        "levelReq": frozenPeakArmour[1][2],
-        "price": frozenPeakArmour[1][3]
+    "Glacial Plate": {
+        "dmgRed": 26,
+        "levelReq": 25,
+        "price": 4000
     },
-    frozenPeakArmour[2][0]: {
-        "dmgRed": frozenPeakArmour[2][1],
-        "levelReq": frozenPeakArmour[2][2],
-        "price": frozenPeakArmour[2][3]
+    "Avalanche Armour": {
+        "dmgRed": 30,
+        "levelReq": 29,
+        "price": 5500
     },
-    lostCavesArmour[0][0]: {
-        "dmgRed": lostCavesArmour[0][1],
-        "levelReq": lostCavesArmour[0][2],
-        "price": lostCavesArmour[0][3]
+    "Phantom Robe": {
+        "dmgRed": 32,
+        "levelReq": 31,
+        "price": 6500
     },
-    lostCavesArmour[1][0]: {
-        "dmgRed": lostCavesArmour[1][1],
-        "levelReq": lostCavesArmour[1][2],
-        "price": lostCavesArmour[1][3]
+    "Runed Plate": {
+        "dmgRed": 36,
+        "levelReq": 35,
+        "price": 8000
     },
-    lostCavesArmour[2][0]: {
-        "dmgRed": lostCavesArmour[2][1],
-        "levelReq": lostCavesArmour[2][2],
-        "price": lostCavesArmour[2][3]
+    "Crystal Fortress": {
+        "dmgRed": 40,
+        "levelReq": 39,
+        "price": 10000
     },
-    burningWasteArmour[0][0]: {
-        "dmgRed": burningWasteArmour[0][1],
-        "levelReq": burningWasteArmour[0][2],
-        "price": burningWasteArmour[0][3]
+    "Emberweave Cloak": {
+        "dmgRed": 42,
+        "levelReq": 41,
+        "price": 12000
     },
-    burningWasteArmour[1][0]: {
-        "dmgRed": burningWasteArmour[1][1],
-        "levelReq": burningWasteArmour[1][2],
-        "price": burningWasteArmour[1][3]
+    "Infernal Shell": {
+        "dmgRed": 46,
+        "levelReq": 45,
+        "price": 15000
     },
-    burningWasteArmour[2][0]: {
-        "dmgRed": burningWasteArmour[2][1],
-        "levelReq": burningWasteArmour[2][2],
-        "price": burningWasteArmour[2][3]
+    "Hellfire Plate": {
+        "dmgRed": 50,
+        "levelReq": 49,
+        "price": 18000
     },
-    dungeonArmours[0][0]: {
-        "dmgRed": dungeonArmours[0][1],
-        "levelReq": dungeonArmours[0][2]
+    "Sentinel's Aegis": {
+        "dmgRed": 12,
+        "levelReq": 10
     },
-    dungeonArmours[1][0]: {
-        "dmgRed": dungeonArmours[1][1],
-        "levelReq": dungeonArmours[1][2]
+    "Wraithbinder Vest": {
+        "dmgRed": 18,
+        "levelReq": 20
     },
-    dungeonArmours[2][0]: {
-        "dmgRed": dungeonArmours[2][1],
-        "levelReq": dungeonArmours[2][2]
+    "Glacier Ward": {
+        "dmgRed": 28,
+        "levelReq": 30
     },
-    dungeonArmours[3][0]: {
-        "dmgRed": dungeonArmours[3][1],
-        "levelReq": dungeonArmours[3][2]
+    "Echoing Plate": {
+        "dmgRed": 38,
+        "levelReq": 40
     },
-    dungeonArmours[4][0]: {
-        "dmgRed": dungeonArmours[4][1],
-        "levelReq": dungeonArmours[4][2]
+    "Molten King's Mantle": {
+        "dmgRed": 50,
+        "levelReq": 50
     },
 }
 
@@ -393,24 +393,24 @@ healthPotions = [
 ]
 
 healthDict = {
-    healthPotions[0][0]: {
-        "amount": healthPotions[0][1],
-        "price": healthPotions[0][2]
+    "Minor Health Potion": {
+        "amount": 10,
+        "price": 5
     },
-    healthPotions[1][0]: {
-        "amount": healthPotions[1][1],
-        "price": healthPotions[1][2]
+    "Lesser Health Potion": {
+        "amount": 25,
+        "price": 12
     },
-    healthPotions[2][0]: {
-        "amount": healthPotions[2][1],
-        "price": healthPotions[2][2]
+    "Health Potion": {
+        "amount": 50,
+        "price": 25
     },
-    healthPotions[3][0]: {
-        "amount": healthPotions[3][1],
-        "price": healthPotions[3][2]
+    "Greater Health Potion": {
+        "amount": 75,
+        "price": 40
     },
-    healthPotions[4][0]: {
-        "amount": healthPotions[4][1],
-        "price": healthPotions[4][2]
+    "Superior Health Potion": {
+        "amount": 100,
+        "price": 60
     }
 }
