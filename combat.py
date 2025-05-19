@@ -102,27 +102,22 @@ def pickingDungeon():
     x = int(input())
     print("This dungeon will contain these enemies:")
     if x == 1:
-        enemiesList = Enemy.grasslandEnemies
         enemyStats = Enemy.grasslandStats
         dungeon = Enemy.burrowEnemies
         print(dungeon)
     elif x == 2:
-        enemiesList = Enemy.darkForestEnemies
         enemyStats = Enemy.darkForestStats
         dungeon = Enemy.heartEnemies
         print(dungeon)
     elif x == 3:
-        enemiesList = Enemy.frozenPeaksEnemies
         enemyStats = Enemy.frozenPeakStats
         dungeon = Enemy.cradleEnemies
         print(dungeon)
     elif x == 4:
-        enemiesList = Enemy.lostCavesEnemies
         enemyStats = Enemy.lostCaveStats
         dungeon = Enemy.vaultEnemies
         print(dungeon)
     elif x == 5:
-        enemiesList = Enemy.burningWastesEnemies
         enemyStats = Enemy.burningWastesStats
         dungeon = Enemy.infernalEnemies
         print(dungeon)
@@ -133,21 +128,21 @@ def pickingDungeon():
     if y == "y":
         print("You have entered the " + Enemy.dungeons[x - 1])
 
-        print("You have encountered " + str(enemiesList[1]))
+        print("You have encountered " + str(dungeon[0]))
         printStats(enemyStats[1])
-        combatSit(enemiesList[1][0], enemyStats[1])
+        combatSit(dungeon[0][0], enemyStats[1])
 
-        print("You have encountered " + str(enemiesList[2]))
+        print("You have encountered " + str(dungeon[1]))
         printStats(enemyStats[2])
-        combatSit(enemiesList[2][0], enemyStats[2])
+        combatSit(dungeon[1][0], enemyStats[2])
 
-        print("You have encountered " + str(enemiesList[3]))
+        print("You have encountered " + str(dungeon[2]))
         printStats(enemyStats[3])
-        combatSit(enemiesList[3][0], enemyStats[3])
+        combatSit(dungeon[2][0], enemyStats[3])
 
-        print("You have encountered " + str(enemiesList[5]))
-        printStats(enemyStats[4])
-        combatSit(enemiesList[5][0], enemyStats[5])
+        print("You have encountered " + str(dungeon[3]))
+        printStats(enemyStats[5])
+        combatSit(dungeon[3][0], enemyStats[5])
 
         print("You have completed the dungeon")
     else:
