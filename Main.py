@@ -36,14 +36,14 @@ def enemySelection(list, array):
         print(str(i + 1) +  ". " + list[i])
         i += 1
     x = input()
-    print(list[int(x) - 1])
-
-    #Print player and enemy stats
-    enemy_stats = array[int(x) - 1]
-    print(f"Health: {enemy_stats[0]} \nMin Damage: {enemy_stats[1]} \nMax Damage: {enemy_stats[2]}")
-    print()
-    print("Player (Level " + str(Player.playerStats.level) + ") \nHealth: " + str(Player.playerStats.health) + " \nMin Damage: " + str(Player.playerStats.minimumDamage) + " \nMax Damage: " + str(Player.playerStats.maximumDamage))
-    return enemy_stats
+    if x == "6":
+        print("You have now entered the " + str(list[5]))
+    else:
+        print(list[int(x) - 1])
+        #Print player and enemy stats
+        enemy_stats = array[int(x) - 1]
+        printStats(enemy_stats)
+        return enemy_stats
 
 #Allows you to choose what enemy you want to fight depending on your location
 def pickingEnemy(x):
@@ -63,7 +63,7 @@ def pickingEnemy(x):
     return enemyStats, initialHealth
 
 #Fighting, Buffing, and Running is managed here
-def combatSit(initialHealth):
+def combatSit(initialHealth, enemyStats):
     #While the enemy is not dead run the method
     while enemyStats[0] > 0:
         print("Attack, Buff, or Run? (a/b/r)")
@@ -73,18 +73,27 @@ def combatSit(initialHealth):
             enemyDamage = combat.attack(enemyStats[1], enemyStats[2])
             playerDamage = combat.attack(Player.playerStats.minimumDamage, Player.playerStats.maximumDamage)
 
-            Player.playerStats.health -= enemyDamage
             enemyStats[0] -= playerDamage
 
-            #When enemy is dead set enemyDead = true
-            print("Player Health: " + str(Player.playerStats.health))
             if enemyStats[0] <= 0:
                 print("Enemy Health: 0")
                 enemyDead = True
             else:
+                Player.playerStats.health -= enemyDamage
+                #When enemy is dead set enemyDead = true
+                print("Player Health: " + str(Player.playerStats.health))
                 print("Enemy Health: " + str(enemyStats[0]))
         elif action == "b":
-            Player.playerStats.health += 10
+            Player.print_consumables()
+
+            x = int(input()) - 1
+
+            if x == len(itemsInfo.healthPotions):
+                return
+
+            Player.playerStats.health += itemsInfo.healthPotions[x][1]
+            Player.playerStats.inventory[itemsInfo.healthPotions[x][0]]["amount"] -= 1
+
             if Player.playerStats.health > Player.playerStats.maximumHealth:
                 Player.playerStats.health = Player.playerStats.maximumHealth
 
@@ -100,7 +109,7 @@ def combatSit(initialHealth):
         gold = combat.loot(enemyStats[4], enemyStats[5])
         Player.playerStats.inventory["gold"]["amount"] += gold
         print("The enemy dropped " + str(gold) + " gold")
-        print("You now have " + str(Player.playerStats.inventory["gold"]["amount"]) + " total gold")
+        Player.print_gold()
 
 #Handles your interaction/s with the sword smith
 def swordSmith():
@@ -122,7 +131,7 @@ def swordSmith():
         y = itemsInfo.burningWasteSwords
     
     #Prints the list of swords you can buy based on the area you selected
-    print("You currently have " + str(Player.playerStats.inventory["gold"]["amount"]) + " gold")
+    Player.print_gold()
 
     if y == itemsInfo.grasslandSwords:
         y.pop(0)
@@ -139,15 +148,17 @@ def swordSmith():
         Player.playerStats.inventory["gold"]["amount"] -= y[buyItem][4]
 
         # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
-        Player.playerStats.inventory[str(y[buyItem][0])] = [{
+        Player.playerStats.inventory[str(y[buyItem][0])] = {
             **itemsInfo.SwordsDict.get(str(y[buyItem][0]), {}),
             "type": "sword"
-        }]
+        }
+
+        print(str(Player.playerStats.inventory[str(y[buyItem][0])]))
 
         y.pop(buyItem)
 
         # Add information from the dictionary with the same name
-        print("You now have " + str(Player.playerStats.inventory["gold"]["amount"]) + " gold")  
+        Player.print_gold()
     else:
         print("You do not have enough gold to purchase this item")
 
@@ -171,7 +182,7 @@ def amourmentsDealer():
             y = itemsInfo.burningWasteArmour
         
         #Prints the list of swords you can buy based on the area you selected
-        print("You currently have " + str(Player.playerStats.inventory["gold"]["amount"]) + " gold")
+        Player.print_gold()
         for i in range(0, len(y)):
             print(str(i + 1) + ". " + str(y[i][0]) + " Price: " + str(y[i][3]) + " gold")
             i += 1
@@ -185,20 +196,51 @@ def amourmentsDealer():
             Player.playerStats.inventory["gold"]["amount"] -= y[buyItem][3]
 
             # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
-            Player.playerStats.inventory[str(y[buyItem][0])] = [{
+            Player.playerStats.inventory[str(y[buyItem][0])] = {
                 **itemsInfo.ArmourDict.get(str(y[buyItem][0]), {}),
                 "type": "armour"
-            }]
+            }   
+
+            print(str(Player.playerStats.inventory[str(y[buyItem][0])]))
 
             y.pop(buyItem)
 
-            print("You now have " + str(Player.playerStats.inventory["gold"]["amount"]) + " gold")  
+            Player.print_gold()
         else:
             print("You do not have enough gold to purchase this item")
 
 #Handles your interaction/s with the Potion Brewer
 def potionBrewer():
-    print("Currently not available")
+    # prints the amount of available gold that you have in your inventory
+    Player.print_gold()
+    # prints the full list of available health potions
+    for i in range(0, len(itemsInfo.healthPotions)):
+        print(str(i + 1) + ". " + str(itemsInfo.healthPotions[i][0]) + " Price: " + str(itemsInfo.healthPotions[i][2]) + " gold")
+        i += 1
+
+    print(str(i + 1) + ". Return")
+
+    # selects the health potion that you want to buy
+    buyItem = int(input()) - 1
+
+    if buyItem == len(itemsInfo.healthPotions):
+        return
+    
+    # asks how many health potions you want to buy
+    print("How many " + str(itemsInfo.healthPotions[buyItem][0]) + " would you like to buy?")
+    amount = int(input())
+
+    # checks if you have enough gold to buy the health potions
+    if Player.playerStats.inventory["gold"]["amount"] >= itemsInfo.healthPotions[buyItem][2] * amount:
+        Player.playerStats.inventory["gold"]["amount"] -= itemsInfo.healthPotions[buyItem][2] * amount
+
+        # adds the health potions to your inventory inventory[potionName] | prints remaining gold and number of available health potions
+        Player.playerStats.inventory[str(itemsInfo.healthPotions[buyItem][0])]["amount"] += amount
+        Player.print_gold()
+        print("You now have " + str(Player.playerStats.inventory[str(itemsInfo.healthPotions[buyItem][0])]["amount"]) + " " + str(itemsInfo.healthPotions[buyItem][0]) + "(s) in your inventory")
+    else:
+        print("You do not have enough gold to purchase this item")
+        return
 
 #Prints enemy stats and drop rates based on the enemies you've killed
 def dictionary():
@@ -207,13 +249,16 @@ def dictionary():
 #Prints all player stats to the user
 def playerStats():
     print(str(Player.playerStats.health) + "/" + str(Player.playerStats.maximumHealth) + " health")
-    print("Weapon: " + Player.playerStats.weapon + " DPS: " + str(Player.playerStats.minimumDamage1) + "->" + str(Player.playerStats.maximumDamage1))
+    print("Weapon: " + Player.playerStats.weapon + " DPS: " + str(Player.playerStats.minimumDamage) + "->" + str(Player.playerStats.maximumDamage))
     print("Armour: " + Player.playerStats.armour + " Damage Reduction: " + str(Player.playerStats.damageReduction))
     print("Level " + str(Player.playerStats.level) + " " + str(Player.playerStats.xp) + "/" + str(int(100 * (Player.playerStats.level**1.5))) + "xp")
     input()
 
 #Allows you to interact with the stuff in town
 def town():
+    Player.playerStats.health = Player.playerStats.maximumHealth
+    print("Welcome to town! What would you like to do?")
+
     #Prints the list of things you can do in town
     for i in range(0, len(WorldMap.townList)):
         print(str(i + 1) +  ". " + WorldMap.townList[i])
@@ -243,12 +288,13 @@ def town():
 
 #Displays all the items within your inventory
 def openInventory():
-    print("Do you want to equip gear? (y/n)")
+    Player.print_inventory()
+    print("Would you like to equip any gear? (y/n)")
     x = input()
     equipmentList = []
     i = 0
     if x == "y":
-        print("Would you like to equip a new weapon or armour? (w/a)")
+        print("weapon or armour? (w/a)")
         x = input()
         if x == "w":
             for item, details in Player.playerStats.inventory.items():
@@ -269,8 +315,8 @@ def openInventory():
                 print("You are not a high enough level to equip this item")
             else:
                 Player.playerStats.weapon = equipmentList[x]
-                Player.playerStats.minimumDamage1 = itemsInfo.SwordsDict[equipmentList[x]]["minDps"]
-                Player.playerStats.maximumDamage1 = itemsInfo.SwordsDict[equipmentList[x]]["maxDps"]
+                Player.playerStats.minimumDamage = itemsInfo.SwordsDict[equipmentList[x]]["minDps"]
+                Player.playerStats.maximumDamage = itemsInfo.SwordsDict[equipmentList[x]]["maxDps"]
             
         elif x == "a":
             for item, details in Player.playerStats.inventory.items():
@@ -293,20 +339,85 @@ def openInventory():
                 Player.playerStats.armour = equipmentList[x]
                 Player.playerStats.damageReduction = itemsInfo.ArmourDict[equipmentList[x]]["dmgRed"]
         else:
-            print()
+            return
     else:
-        print(str(Player.playerStats.inventory))
+        Player.print_inventory()
     equipmentList.clear()
     i = 0
 
+def pickingDungeon():
+    #Prints the list of dungeons you can travel to
+    for i in range(0, len(Enemy.dungeons)):
+        print(str(i + 1) +  ". " + Enemy.dungeons[i])
+        i += 1
+    print("Pick a dungeon to fight")
+    x = int(input())
+    print("This dungeon will contain these enemies:")
+    if x == 1:
+        enemiesList = Enemy.grasslandEnemies
+        enemyStats = Enemy.grasslandStats
+        dungeon = Enemy.burrowEnemies
+        print(dungeon)
+    elif x == 2:
+        enemiesList = Enemy.darkForestEnemies
+        enemyStats = Enemy.darkForestStats
+        dungeon = Enemy.heartEnemies
+        print(dungeon)
+    elif x == 3:
+        enemiesList = Enemy.frozenPeaksEnemies
+        enemyStats = Enemy.frozenPeakStats
+        dungeon = Enemy.cradleEnemies
+        print(dungeon)
+    elif x == 4:
+        enemiesList = Enemy.lostCavesEnemies
+        enemyStats = Enemy.lostCaveStats
+        dungeon = Enemy.vaultEnemies
+        print(dungeon)
+    elif x == 5:
+        enemiesList = Enemy.burningWastesEnemies
+        enemyStats = Enemy.burningWastesStats
+        dungeon = Enemy.infernalEnemies
+        print(dungeon)
+    
+    print("Are you sure you want to enter? (y/n)")
+    y = input()
+
+    if y == "y":
+        print("You have entered the " + Enemy.dungeons[x - 1])
+
+        print("You have encountered " + str(enemiesList[1]))
+        printStats(enemyStats[1])
+        combatSit(enemiesList[1][0], enemyStats[1])
+
+        print("You have encountered " + str(enemiesList[2]))
+        printStats(enemyStats[2])
+        combatSit(enemiesList[2][0], enemyStats[2])
+
+        print("You have encountered " + str(enemiesList[3]))
+        printStats(enemyStats[3])
+        combatSit(enemiesList[3][0], enemyStats[3])
+
+        print("You have encountered " + str(enemiesList[5]))
+        printStats(enemyStats[4])
+        combatSit(enemiesList[5][0], enemyStats[5])
+
+        print("You have completed the dungeon")
+    else:
+        return
+
+def printStats(enemy_stats):
+    print(f"Health: {enemy_stats[0]} \nMin Damage: {enemy_stats[1]} \nMax Damage: {enemy_stats[2]}")
+    print()
+    print("Player (Level " + str(Player.playerStats.level) + ") \nHealth: " + str(Player.playerStats.health) + " \nMin Damage: " + str(Player.playerStats.minimumDamage) + " \nMax Damage: " + str(Player.playerStats.maximumDamage) + "\nDamage Reduction: " + str(Player.playerStats.damageReduction))
 
 #forever loop so that the game never ends unless manually closed
 while True:
     x = traveling()
-    # os.system('cls' if os.name == 'nt' else 'clear')
-    if x >= 3:
+    if x == 8:
+        pickingDungeon()
+    elif x >= 3:
         enemyStats, initialHealth = pickingEnemy(x)
-        combatSit(initialHealth) 
+        combatSit(initialHealth, enemyStats) 
     elif x == 2:
         town()
     elif x == 1:

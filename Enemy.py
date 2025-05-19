@@ -6,6 +6,7 @@ grasslandStats = [
     [40, 10, 15, 5, 18, 35],  # Giant Hornet (Level 5)
     [75, 12, 18, 7, 25, 50],  # Goblin Scout (Level 7)
     [100, 15, 20, 9, 35, 70],  # Bandit Ruffian (Level 9)
+    [150, 20, 30, 10, 100, 150],  # Ravaging Boar King (Level 10)
 ]
 
 darkForestStats = [
@@ -15,6 +16,7 @@ darkForestStats = [
     [200, 22, 28, 15, 70, 130],  # Cursed Treant (Level 15)
     [225, 25, 30, 17, 85, 160],  # Wraith of the Woods (Level 17)
     [250, 28, 32, 19, 100, 200],  # Nightfang Wolf (Level 19)
+    [350, 35, 50, 20, 150, 300], # Hallowborn Ent (Level 20)
 ]
 
 frozenPeakStats = [
@@ -24,6 +26,7 @@ frozenPeakStats = [
     [325, 35, 40, 25, 160, 320],  # Snow Harpy (Level 25)
     [350, 38, 42, 27, 180, 370],  # Avalanche Beast (Level 27)
     [375, 40, 45, 29, 200, 420],  # Frost Wraith (Level 29)
+    [600, 50, 70, 30, 300, 600], # Stormbound Titan (Level 30)
 ]
 
 lostCaveStats = [
@@ -33,6 +36,7 @@ lostCaveStats = [
     [450, 48, 52, 35, 320, 600],  # Phantom Miner (Level 35)
     [475, 50, 55, 37, 350, 650],  # Undead Explorer (Level 37)
     [500, 52, 58, 39, 400, 700],  # Crystal Guardian (Level 39)
+    [850, 70, 95, 40, 500, 1000], # Echoing Warden (Level 40)
 ]
 
 burningWastesStats = [
@@ -41,7 +45,8 @@ burningWastesStats = [
     [550, 58, 62, 43, 500, 1000],  # Flame Wyrm (Level 43)
     [575, 60, 65, 45, 600, 1200],  # Magma Golem (Level 45)
     [600, 62, 68, 47, 700, 1400],  # Infernal Hound (Level 47)
-    [625, 65, 70, 49, 800, 1600]   # Blazing Demon (Level 49)
+    [625, 65, 70, 49, 800, 1600],   # Blazing Demon (Level 49)
+    [1150, 90, 120, 50, 1000, 2000], # Pyre Lord Azgarn (Level 50)
 ]
 
 grasslandEnemies = [
@@ -82,6 +87,49 @@ burningWastesEnemies = [
     "Magma Golem (Level " + str(burningWastesStats[2][3]) + ")",
     "Infernal Hound (Level " + str(burningWastesStats[3][3]) + ")",
     "Blazing Demon (Level " + str(burningWastesStats[4][3]) + ")"
+]
+
+dungeons =[
+    "Burrow of the Ravager (Level 10)",
+    "Heart of the Hallow (Level 20)",
+    "Cradle of Stormbound (Level 30)",
+    "Vault of Forgotten Echoes (Level 40)",
+    "Infernal Abyss (Level 50)"
+]
+
+burrowEnemies = [
+    grasslandEnemies[1],
+    grasslandEnemies[2],
+    grasslandEnemies[3],
+    "Ravaging Boar King (Level " + str(grasslandStats[5][3]) + ")"
+]
+
+heartEnemies = [
+    darkForestEnemies[1],
+    darkForestEnemies[2],
+    darkForestEnemies[3],
+    "Hallowborn Ent (Level " + str(darkForestStats[5][3]) + ")"
+]
+
+cradleEnemies = [
+    frozenPeaksEnemies[1],
+    frozenPeaksEnemies[2],
+    frozenPeaksEnemies[3],
+    "Stormbound Titan (Level " + str(frozenPeakStats[5][3]) + ")"
+]
+
+vaultEnemies = [
+    lostCavesEnemies[1],
+    lostCavesEnemies[2],
+    lostCavesEnemies[3],
+    "Echoing Warden (Level " + str(lostCaveStats[5][3]) + ")"
+]
+
+infernalEnemies = [
+    burningWastesEnemies[1],
+    burningWastesEnemies[2],
+    burningWastesEnemies[3],
+    "Pyre Lord Azgarn (Level " + str(burningWastesStats[5][3]) + ")"
 ]
 
 def xpCalc(pLevel, eLevel):

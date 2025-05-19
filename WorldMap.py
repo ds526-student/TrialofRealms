@@ -5,7 +5,8 @@ locationsList = [
     "The Dark Forest (Level 11-20)",
     "The Frozen Peaks (Level 21-30)",
     "The Lost Caves (Level 31-40)",
-    "The Burning Wastes (Level 41-50)"
+    "The Burning Wastes (Level 41-50)",
+    "Area Dungeons (Level 10-50)"
 ]
 
 townList = [
