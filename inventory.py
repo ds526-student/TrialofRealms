@@ -64,11 +64,11 @@ def openInventory():
             x = utils.get_valid_int("Please select an item: ", 1, len(armourList) + 1, return_zero_based=True)
 
             item = equipmentList[x]
-            if itemsInfo.ArmourDict[item]["levelReq"] > Player.playerStats.level:
+            if itemsInfo.meleeArmourDict[item]["levelReq"] > Player.playerStats.level:
                 print("You are not a high enough level to equip this item")
             else:
                 Player.playerStats.armour = item
-                Player.playerStats.damageReduction = itemsInfo.ArmourDict[item]["dmgRed"]
+                Player.playerStats.damageReduction = itemsInfo.meleeArmourDict[item]["dmgRed"]
         else:
             return
     equipmentList.clear()

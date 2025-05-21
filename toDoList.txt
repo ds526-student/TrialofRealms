@@ -8,6 +8,7 @@
 
 1. Character Classes
     Warrior/Mage/Ranger -> Additional Unique Abilities
+    New weapons and armour for each class ✔️
     Skill Tree 
 
 2. Random Encounters

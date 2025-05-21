@@ -16,15 +16,15 @@ def amourmentsDealer():
     x = utils.get_valid_int("Please select a location: ", 1, len(WorldMap.locationsList) + 1, return_zero_based=True)
 
     if x == 0:
-        y = itemsInfo.grasslandArmour
+        y = itemsInfo.grasslandMeleeArmour
     elif x == 1:
-        y = itemsInfo.darkForestArmour
+        y = itemsInfo.darkForestMeleeArmour
     elif x == 2:
-        y = itemsInfo.frozenPeakArmour
+        y = itemsInfo.frozenPeakMeleeArmour
     elif x == 3:
-        y = itemsInfo.lostCavesArmour
+        y = itemsInfo.lostCavesMeleeArmour
     elif x == 4:
-        y = itemsInfo.burningWasteArmour
+        y = itemsInfo.burningWasteMeleeArmour
     elif x == 5:
         return
     
@@ -58,7 +58,7 @@ def amourmentsDealer():
 
         # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
         Player.playerStats.inventory[str(y[buyItem][0])] = {
-            **itemsInfo.ArmourDict.get(str(y[buyItem][0]), {}),
+            **itemsInfo.meleeArmourDict.get(str(y[buyItem][0]), {}),
             "type": "armour"
         }   
 
