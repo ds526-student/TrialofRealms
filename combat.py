@@ -1,6 +1,7 @@
 import Player
 import game_data.Enemy as Enemy
 import game_data.itemsInfo as itemsInfo
+import utils
 
 def attack(minDmg, maxDmg):
     from random import randrange
@@ -54,6 +55,7 @@ def pickingEnemy(x):
 
 #Fighting, Buffing, and Running is managed here
 def combatSit(initialHealth, enemyStats):
+    cooldown = 0
     #While the enemy is not dead run the method
     while enemyStats[0] > 0:
         print("Attack, Buff, or Run? (a/b/r)")
@@ -74,21 +76,30 @@ def combatSit(initialHealth, enemyStats):
                 print("Player Health: " + str(Player.playerStats.health))
                 print("Enemy Health: " + str(enemyStats[0]))
         elif action == "b":
-            Player.print_consumables()
+            if cooldown > 0:
+                print("You cannot use a consumable yet")
+                continue
+            elif Player.playerStats.health == Player.playerStats.maximumHealth:
+                print("You are already at full health")
+                continue
+            else:
+                Player.print_consumables()
 
-            x = int(input()) - 1
+                x = int(input()) - 1
 
-            if x == len(itemsInfo.healthPotions):
-                return
+                if x == len(itemsInfo.healthPotions):
+                    return
 
-            Player.playerStats.health += itemsInfo.healthPotions[x][1]
-            Player.playerStats.inventory[itemsInfo.healthPotions[x][0]]["amount"] -= 1
+                Player.playerStats.health += itemsInfo.healthPotions[x][1]
+                Player.playerStats.inventory[itemsInfo.healthPotions[x][0]]["amount"] -= 1
 
-            if Player.playerStats.health > Player.playerStats.maximumHealth:
-                Player.playerStats.health = Player.playerStats.maximumHealth
+                if Player.playerStats.health > Player.playerStats.maximumHealth:
+                    Player.playerStats.health = Player.playerStats.maximumHealth
 
-            print("Player Health: " + str(Player.playerStats.health))
-            print("Enemy Health: " + str(enemyStats[0]))
+                print("Player Health: " + str(Player.playerStats.health))
+                print("Enemy Health: " + str(enemyStats[0]))
+
+                cooldown = 3
         elif action == "r":
             return
         else:
@@ -103,6 +114,7 @@ def combatSit(initialHealth, enemyStats):
         Player.playerStats.inventory["gold"]["amount"] += gold
         print("The enemy dropped " + str(gold) + " gold")
         Player.print_gold()
+        utils.enter()
 
 
 def pickingDungeon():
@@ -119,49 +131,70 @@ def pickingDungeon():
     if x == 1:
         enemyStats = Enemy.grasslandStats
         dungeon = Enemy.burrowEnemies
+        swordReward = itemsInfo.dungeonSwords[0][0]   
+        armourReward = itemsInfo.dungeonArmours[0][0]
         print(dungeon)
     elif x == 2:
         enemyStats = Enemy.darkForestStats
         dungeon = Enemy.heartEnemies
+        swordReward = itemsInfo.dungeonSwords[1][0]
+        armourReward = itemsInfo.dungeonArmours[1][0]
         print(dungeon)
     elif x == 3:
         enemyStats = Enemy.frozenPeakStats
         dungeon = Enemy.cradleEnemies
+        swordReward = itemsInfo.dungeonSwords[2][0]   
+        armourReward = itemsInfo.dungeonArmours[2][0]
         print(dungeon)
     elif x == 4:
         enemyStats = Enemy.lostCaveStats
         dungeon = Enemy.vaultEnemies
+        swordReward = itemsInfo.dungeonSwords[3][0]   
+        armourReward = itemsInfo.dungeonArmours[3][0]
         print(dungeon)
     elif x == 5:
         enemyStats = Enemy.burningWastesStats
         dungeon = Enemy.infernalEnemies
+        swordReward = itemsInfo.dungeonSwords[4][0]   
+        armourReward = itemsInfo.dungeonArmours[4][0]
         print(dungeon)
     elif x == len(Enemy.dungeons) + 1:
         return
     
-    print("Are you sure you want to enter? (y/n)")
-    y = input()
+    y = utils.confirm("Would you like to enter the dungeon? (y/n) ")
 
     if y == "y":
         print("You have entered the " + Enemy.dungeons[x - 1])
 
         print("You have encountered " + str(dungeon[0]))
         printStats(enemyStats[1])
-        combatSit(dungeon[0][0], enemyStats[1].copy)
+        combatSit(dungeon[0][0], enemyStats[1].copy())
 
         print("You have encountered " + str(dungeon[1]))
         printStats(enemyStats[2])
-        combatSit(dungeon[1][0], enemyStats[2].copy)
+        combatSit(dungeon[1][0], enemyStats[2].copy())
 
         print("You have encountered " + str(dungeon[2]))
         printStats(enemyStats[3])
-        combatSit(dungeon[2][0], enemyStats[3].copy)
+        combatSit(dungeon[2][0], enemyStats[3].copy())
 
         print("You have encountered " + str(dungeon[3]))
         printStats(enemyStats[5])
-        combatSit(dungeon[3][0], enemyStats[5].copy)
+        combatSit(dungeon[3][0], enemyStats[5].copy())
 
         print("You have completed the dungeon")
+        print("You have received " + swordReward + " and " + armourReward)
+        # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
+        Player.playerStats.inventory[str(swordReward)] = {
+            **itemsInfo.SwordsDict.get(str(swordReward), {}),
+            "type": "sword"
+        }
+        
+        Player.playerStats.inventory[str(armourReward)] = {
+            **itemsInfo.ArmourDict.get(str(armourReward), {}),
+            "type": "armour"
+        }   
+        utils.enter()
     else:
         return
 

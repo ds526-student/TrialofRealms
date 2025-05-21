@@ -13,7 +13,7 @@ def amourmentsDealer():
     
     print(str(i - 1) + ". Return")
 
-    utils.get_valid_int("Please select a location: ", 1, len(WorldMap.locationsList) + 1, return_zero_based=True)
+    x = utils.get_valid_int("Please select a location: ", 1, len(WorldMap.locationsList) + 1, return_zero_based=True)
 
     if x == 0:
         y = itemsInfo.grasslandArmour

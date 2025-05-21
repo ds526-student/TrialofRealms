@@ -1,13 +1,13 @@
 import WorldMap
 import Player
-import game_data.itemsInfo
+import game_data.itemsInfo as itemsInfo
+import utils
 
 #Displays all the items within your inventory
 def openInventory():
     Player.print_inventory()
 
-    print("Would you like to equip any gear? (y/n)")
-    x = input()
+    x = utils.confirm("Would you like to equip any gear? (y/n) ")
     equipmentList = []
     i = 0
     if x == "y":
@@ -34,16 +34,7 @@ def openInventory():
                 "type": "sword"
             }
 
-            invalidResponse = True
-            while invalidResponse:
-                try:
-                    x = int(input())
-                    if x > 0 and x < len(swordList) + 1:
-                        invalidResponse = False
-                    else: 
-                        print("Invalid response please try again")
-                except ValueError:
-                    print("Invalid response please try again")
+            x = utils.get_valid_int("Please select an item: ", 1, len(swordList) + 1, return_zero_based=True)
 
             item = equipmentList[x]
             if itemsInfo.SwordsDict[item]["levelReq"] > Player.playerStats.level:
@@ -56,41 +47,28 @@ def openInventory():
         elif x == "a":
             print("You currently have " + Player.playerStats.armour + " equipped")
             armourList = []
+            equipmentList = []
+            i = 0
             for item, details in Player.playerStats.inventory.items():
-                if isinstance(details, list) and details[0].get('type') == 'armour':
-                    armourList.append(f"{i} - {item}: Damage Reduction: {details[0].get('dmgRed', 'N/A')}")
-                elif isinstance(details, dict) and details.get('type') == 'armour':
+                if isinstance(details, dict) and details.get('type') == 'armour':
                     armourList.append(f"{i} - {item}: Damage Reduction: {details.get('dmgRed', 'N/A')}")
-                i += 1
-                equipmentList.append(item)
-                if len(armourList) == 0:
-                    print("You have no armour in your inventory")
-                    print("Press enter to continue")
-                    input()
-                    return
+                    equipmentList.append(item)
+                    i += 1
+            if len(armourList) == 0:
+                print("You have no armour in your inventory")
+                print("Press enter to continue")
+                input()
+                return
             print("Which item would you like to equip?")
 
-            invalidResponse = True
-            while invalidResponse:
-                try:
-                    x = int(input())
-                    if x > 0 and x < len(armourList) + 1:
-                        invalidResponse = False
-                    else: 
-                        print("Invalid response please try again")
-                except ValueError:
-                    print("Invalid response please try again")
+            x = utils.get_valid_int("Please select an item: ", 1, len(armourList) + 1, return_zero_based=True)
 
-            Player.playerStats.inventory[Player.playerStats.armour] = {
-                **itemsInfo.ArmourDict.get(Player.playerStats.armour, {}),
-                "type": "armour"
-            }
             item = equipmentList[x]
             if itemsInfo.ArmourDict[item]["levelReq"] > Player.playerStats.level:
                 print("You are not a high enough level to equip this item")
             else:
-                Player.playerStats.armour = equipmentList[x]
-                Player.playerStats.damageReduction = itemsInfo.ArmourDict[equipmentList[x]]["dmgRed"]
+                Player.playerStats.armour = item
+                Player.playerStats.damageReduction = itemsInfo.ArmourDict[item]["dmgRed"]
         else:
             return
     equipmentList.clear()

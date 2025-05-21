@@ -1,6 +1,10 @@
-0. Dungeon weapon/armour drops
+0. Dungeon weapon/armour drops ✔️
 
-0-1. Cooldown on potions so they cannot be spammed endlessly
+0-1. Cooldown on potions so they cannot be spammed endlessly ✔️
+
+0-2. Beastiary
+
+0-3. Fix the xp calculation ✔️
 
 1. Character Classes
     Warrior/Mage/Ranger -> Additional Unique Abilities

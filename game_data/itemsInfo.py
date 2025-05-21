@@ -208,7 +208,7 @@ SwordsDict = {
         "levelReq": 49,
         "price": 18000
     },
-    "Blade fo teh Verdant Guardian": {
+    "Blade of the Verdant Guardian": {
         "minDps": 18,
         "maxDps": 24,
         "levelReq": 10

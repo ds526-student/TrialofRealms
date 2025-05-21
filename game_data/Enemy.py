@@ -137,14 +137,12 @@ def xpCalc(pLevel, eLevel):
 
     levelDiff = eLevel - pLevel
     if levelDiff >= 3:
-        xpMulti = 1 + (levelDiff - 2 * 0.25)
+        xpMulti = 1 + ((levelDiff - 2) * 0.25)
         if xpMulti > 2:
             xpMulti = 2
     elif levelDiff <= -3:
-        xpMulti = 1 - (levelDiff + 2 * 0.25)
-        if xpMulti < 0.25:
-            xpMulti = 0.1
-    elif levelDiff <= 2 and levelDiff >= -2:
+        xpMulti = max(0.1, 1 - (abs(levelDiff) - 2) * 0.25)
+    else:
         xpMulti = 1
 
     xpEarned = int(baseXp * xpMulti)    

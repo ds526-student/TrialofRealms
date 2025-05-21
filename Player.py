@@ -81,12 +81,13 @@ def print_inventory():
         if isinstance(details, list): 
             details = details[0]
         if details["type"] == "sword":
-            print(f"{item} | Damage = {details['minDps']}->{details['maxDps']}) | level {details['levelReq']}")
+            print(f"{item} | Damage = {details['minDps']}->{details['maxDps']} | level {details['levelReq']}")
     print("Armour:")
     for item, details in playerStats.inventory.items():
         if isinstance(details, list): 
             details = details[0]
-            print(f"{item}: | Damage Reduction = {details['dmgRed']}) | level {details['levelReq']}")
+        if details["type"] == "armour":
+            print(f"{item}: | Damage Reduction = {details['dmgRed']} | level {details['levelReq']}")
     print("Consumables:")
     for item, details in playerStats.inventory.items():
         if details["type"] == "consumable" and details["amount"] > 0:
