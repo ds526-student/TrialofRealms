@@ -16,7 +16,16 @@ def enemySelection(list, array):
     for i in range(0, len(list)):
         print(str(i + 1) +  ". " + list[i])
         i += 1
-    x = input()
+
+    invalidResponse = True  
+    while invalidResponse:
+        try:
+            x = int(input())
+            if x > 0 or x < len(list):
+                invalidResponse = False 
+            print("Invalid input")
+        except ValueError:
+            print("Invalid input")
     if x == "6":
         print("You have now entered the " + str(list[5]))
     else:
@@ -82,6 +91,9 @@ def combatSit(initialHealth, enemyStats):
             print("Enemy Health: " + str(enemyStats[0]))
         elif action == "r":
             return
+        else:
+            print("Invalid input")
+            continue
     enemyStats[0] = initialHealth
     #If the enemy is dead provide players with xp and roll drops
     if enemyDead:
@@ -98,6 +110,9 @@ def pickingDungeon():
     for i in range(0, len(Enemy.dungeons)):
         print(str(i + 1) +  ". " + Enemy.dungeons[i])
         i += 1
+
+    i += 1
+    print(str(i) + ". Return")
     print("Pick a dungeon to fight")
     x = int(input())
     print("This dungeon will contain these enemies:")
@@ -121,6 +136,8 @@ def pickingDungeon():
         enemyStats = Enemy.burningWastesStats
         dungeon = Enemy.infernalEnemies
         print(dungeon)
+    elif x == len(Enemy.dungeons) + 1:
+        return
     
     print("Are you sure you want to enter? (y/n)")
     y = input()

@@ -10,7 +10,7 @@ class playerStats:
     # maximumDamage = itemsInfo.SwordsDict[weapon]["maxDps"]
     minimumDamage = 10000
     maximumDamage = 10001
-    level = 1
+    level = 50
     xp = 0 
 
     inventory = {
@@ -44,8 +44,8 @@ def print_consumables():
     i = 1
     for item, details in playerStats.inventory.items():
         if details["type"] == "consumable":
-            if details["amount"] > 0:
-                print(f"{i}. {item}({itemsInfo.healthDict[item]["amount"]} hp): {details['amount']}")    
+            if details['amount'] > 0:
+                print(f"{i}. {item}({itemsInfo.healthDict[item]['amount']} hp): {details['amount']}")    
                 i += 1
 
     print(str(i) + ". Cancel")
@@ -55,7 +55,7 @@ def print_weapons():
     for item, details in playerStats.inventory.items():
         if details["type"] == "sword":
             if details["amount"] > 0:
-                print(f"{i}. {item}(dmg {itemsInfo.SwordsDict[item]["minDps"]} -> {itemsInfo.SwordsDict[item]["maxDps"]}) Required level {itemsInfo.SwordsDict[item]["levelReq"]}: {details['amount']}")
+                print(f"{i}. {item}(dmg {itemsInfo.SwordsDict[item]['minDps']} -> {itemsInfo.SwordsDict[item]['maxDps']}) Required level {itemsInfo.SwordsDict[item]['levelReq']}: {details['amount']}")
                 i += 1
 
     print(str(i) + ". Cancel")
