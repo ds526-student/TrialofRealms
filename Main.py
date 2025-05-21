@@ -70,7 +70,7 @@ def town():
     elif x == 2:
         potionBrewer.potionBrewer()
     elif x == 3:
-        beastiary.beastlog()
+        beastiary.beastLog()
     elif x == 4:
         playerStats()
 

@@ -50,43 +50,43 @@ burningWastesStats = [
 ]
 
 grasslandEnemies = [
-    "Wild Boar (Level " + str(grasslandStats[0][3]) + ")",
-    "Stray Wolf (Level " + str(grasslandStats[1][3]) + ")",
-    "Giant Hornet (Level " + str(grasslandStats[2][3]) + ")",
-    "Goblin Scout (Level " + str(grasslandStats[3][3]) + ")",
-    "Bandit Ruffian (Level " + str(grasslandStats[4][3]) + ")"
+    "Wild Boar",
+    "Stray Wolf",
+    "Giant Hornet",
+    "Goblin Scout",
+    "Bandit Ruffian"
 ]
 
 darkForestEnemies = [
-    "Shadow Stalker (Level " + str(darkForestStats[0][3]) + ")",
-    "Venomfang Spider (Level " + str(darkForestStats[1][3]) + ")",
-    "Cursed Treant (Level " + str(darkForestStats[2][3]) + ")",
-    "Wraith of the Woods (Level " + str(darkForestStats[3][3]) + ")",
-    "Nightfang Wolf (Level " + str(darkForestStats[4][3]) + ")"
+    "Shadow Stalker",
+    "Venomfang Spider",
+    "Cursed Treant",
+    "Wraith of the Woods",
+    "Nightfang Wolf"
 ]
 
 frozenPeaksEnemies = [
-    "Frostbite Bear (Level " + str(frozenPeakStats[0][3]) + ")",
-    "Ice Golem (Level " + str(frozenPeakStats[1][3]) + ")",
-    "Snow Harpy (Level " + str(frozenPeakStats[2][3]) + ")",
-    "Avalanche Beast (Level " + str(frozenPeakStats[3][3]) + ")",
-    "Frost Wraith (Level " + str(frozenPeakStats[4][3]) + ")"
+    "Frostbite Bear",
+    "Ice Golem",
+    "Snow Harpy",
+    "Avalanche Beast",
+    "Frost Wraith"
 ]
 
 lostCavesEnemies = [
-    "Cave Dweller (Level " + str(lostCaveStats[0][3]) + ")",
-    "Stone Serpent (Level " + str(lostCaveStats[1][3]) + ")",
-    "Phantom Miner (Level " + str(lostCaveStats[2][3]) + ")",
-    "Undead Explorer (Level " + str(lostCaveStats[3][3]) + ")",
-    "Crystal Guardian (Level " + str(lostCaveStats[4][3]) + ")"
+    "Cave Dweller",
+    "Stone Serpent",
+    "Phantom Miner",
+    "Undead Explorer",
+    "Crystal Guardian"
 ]
 
 burningWastesEnemies = [
-    "Ashen Revenant (Level " + str(burningWastesStats[0][3]) + ")",
-    "Flame Wyrm (Level " + str(burningWastesStats[1][3]) + ")",
-    "Magma Golem (Level " + str(burningWastesStats[2][3]) + ")",
-    "Infernal Hound (Level " + str(burningWastesStats[3][3]) + ")",
-    "Blazing Demon (Level " + str(burningWastesStats[4][3]) + ")"
+    "Ashen Revenant",
+    "Flame Wyrm",
+    "Magma Golem",
+    "Infernal Hound",
+    "Blazing Demon"
 ]
 
 dungeons =[
@@ -132,18 +132,61 @@ infernalEnemies = [
     "Pyre Lord Azgarn (Level " + str(burningWastesStats[5][3]) + ")"
 ]
 
-def xpCalc(pLevel, eLevel):
-    baseXp = 50 * (eLevel**1.2) 
+def makeEnemy(level, health, min_dps, max_dps, min_coins=None, max_coins=None):
+    enemy = {
+        "Level": level,
+        "Health": health,
+        "minDps": min_dps,
+        "maxDps": max_dps,
+        "kills": 0,
+    }
+    if min_coins is not None:
+        enemy["minCoins"] = min_coins
+    if max_coins is not None:
+        enemy["maxCoins"] = max_coins
+    return enemy
 
-    levelDiff = eLevel - pLevel
-    if levelDiff >= 3:
-        xpMulti = 1 + ((levelDiff - 2) * 0.25)
-        if xpMulti > 2:
-            xpMulti = 2
-    elif levelDiff <= -3:
-        xpMulti = max(0.1, 1 - (abs(levelDiff) - 2) * 0.25)
-    else:
-        xpMulti = 1
+grasslandBeast = {
+    "Wild Boar": makeEnemy(1, 15, 3, 9, 1, 8),
+    "Stray Wolf": makeEnemy(3, 25, 7, 12, 3, 12),
+    "Giant Hornet": makeEnemy(5, 40, 10, 15),
+    "Goblin Scout": makeEnemy(7, 75, 12, 18),
+    "Bandit Ruffian": makeEnemy(9, 100, 15, 20),
+    "Ravaging Boar King": makeEnemy(10, 150, 20, 30, 10, 100)
+}
 
-    xpEarned = int(baseXp * xpMulti)    
-    return xpEarned
+darkForestBeast = {
+    "Shadow Stalker": makeEnemy(11, 150, 18, 22),
+    "Venomfang Spider": makeEnemy(13, 175, 20, 25),
+    "Cursed Treant": makeEnemy(15, 200, 22, 28),
+    "Wraith of the Woods": makeEnemy(17, 225, 25, 30),
+    "Nightfang Wolf": makeEnemy(19, 250, 28, 32),
+    "Hallowborn Ent": makeEnemy(20, 350, 35, 50)
+}
+
+frozenPeakBeast = {
+    "Frostbite Bear": makeEnemy(21, 275, 30, 35),
+    "Ice Golem": makeEnemy(23, 300, 32, 38),
+    "Snow Harpy": makeEnemy(25, 325, 35, 40),
+    "Avalanche Beast": makeEnemy(27, 350, 38, 42),
+    "Frost Wraith": makeEnemy(29, 375, 40, 45),
+    "Stormbound Titan": makeEnemy(30, 600, 50, 70)
+}
+
+lostCaveBeast = {
+    "Cave Dweller": makeEnemy(31, 400, 42, 48),
+    "Stone Serpent": makeEnemy(33, 425, 45, 50),
+    "Phantom Miner": makeEnemy(35, 450, 48, 52),
+    "Undead Explorer": makeEnemy(37, 475, 50, 55),
+    "Crystal Guardian": makeEnemy(39, 500, 52, 58),
+    "Echoing Warden": makeEnemy(40, 850, 70, 95)
+}
+
+burningWastesBeast = {
+    "Ashen Revenant": makeEnemy(41, 525, 55, 60),
+    "Flame Wyrm": makeEnemy(43, 550, 58, 62),
+    "Magma Golem": makeEnemy(45, 575, 60, 65),
+    "Infernal Hound": makeEnemy(47, 600, 62, 68),
+    "Blazing Demon": makeEnemy(49, 625, 65, 70),
+    "Pyre Lord Azgarn": makeEnemy(50, 1150, 90, 120)
+}

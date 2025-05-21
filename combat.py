@@ -2,6 +2,10 @@ import Player
 import game_data.Enemy as Enemy
 import game_data.itemsInfo as itemsInfo
 import utils
+import town.beastiary as beastiary
+
+globalEnemyDict = {}
+globalEnemyName = ""
 
 def attack(minDmg, maxDmg):
     from random import randrange
@@ -13,41 +17,42 @@ def loot(minCoins, maxCoins):
 
 #Select the enemy that you want to fight based on your location 
 def enemySelection(list, array):
+    global globalEnemyName
     #print each of the enemies in the area
     for i in range(0, len(list)):
         print(str(i + 1) +  ". " + list[i])
         i += 1
 
-    invalidResponse = True  
-    while invalidResponse:
-        try:
-            x = int(input())
-            if x > 0 or x < len(list):
-                invalidResponse = False 
-            print("Invalid input")
-        except ValueError:
-            print("Invalid input")
+    x = utils.get_valid_int("Please select an enemy: ", 1, len(list) + 1, return_zero_based=True)
+
     if x == "6":
         print("You have now entered the " + str(list[5]))
     else:
-        print(list[int(x) - 1])
+        print(list[int(x)])
+        globalEnemyName = list[int(x)]
         #Print player and enemy stats
-        enemy_stats = array[int(x) - 1]
+        enemy_stats = array[int(x)]
         printStats(enemy_stats)
         return enemy_stats
 
 #Allows you to choose what enemy you want to fight depending on your location
 def pickingEnemy(x):
+    global globalEnemyDict
     print("Pick an enemy to fight")
     if x == 3:
+        globalEnemyDict = Enemy.grasslandBeast
         enemyStats = enemySelection(Enemy.grasslandEnemies, Enemy.grasslandStats)
     elif x == 4:
+        globalEnemyDict = Enemy.darkForestBeast
         enemyStats = enemySelection(Enemy.darkForestEnemies, Enemy.darkForestStats)
     elif x == 5:
+        globalEnemyDict = Enemy.frozenPeakBeast
         enemyStats = enemySelection(Enemy.frozenPeaksEnemies, Enemy.frozenPeakStats)
     elif x == 6:
+        globalEnemyDict = Enemy.lostCaveBeast
         enemyStats = enemySelection(Enemy.lostCavesEnemies, Enemy.lostCaveStats)
     elif x == 7:
+        globalEnemyDict = Enemy.burningWastesBeast
         enemyStats = enemySelection(Enemy.burningWastesEnemies, Enemy.burningWastesStats)
     
     initialHealth = enemyStats[0]
@@ -108,13 +113,14 @@ def combatSit(initialHealth, enemyStats):
     enemyStats[0] = initialHealth
     #If the enemy is dead provide players with xp and roll drops
     if enemyDead:
-        xpEarned = Enemy.xpCalc(Player.playerStats.level, enemyStats[3])
+        xpEarned = Player.xpCalc(Player.playerStats.level, enemyStats[3])
         xpRequired = Player.addXp(xpEarned)
         gold = loot(enemyStats[4], enemyStats[5])
         Player.playerStats.inventory["gold"]["amount"] += gold
         print("The enemy dropped " + str(gold) + " gold")
         Player.print_gold()
         utils.enter()
+        beastiary.beastLogEntry(globalEnemyDict, globalEnemyName)
 
 
 def pickingDungeon():
@@ -199,6 +205,6 @@ def pickingDungeon():
         return
 
 def printStats(enemy_stats):
-    print(f"Health: {enemy_stats[0]} \nMin Damage: {enemy_stats[1]} \nMax Damage: {enemy_stats[2]}")
+    print(f"Level: {enemy_stats[3]} \nHealth: {enemy_stats[0]} \nMin Damage: {enemy_stats[1]} \nMax Damage: {enemy_stats[2]}")
     print()
     print("Player (Level " + str(Player.playerStats.level) + ") \nHealth: " + str(Player.playerStats.health) + " \nMin Damage: " + str(Player.playerStats.minimumDamage) + " \nMax Damage: " + str(Player.playerStats.maximumDamage) + "\nDamage Reduction: " + str(Player.playerStats.damageReduction))

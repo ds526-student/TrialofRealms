@@ -57,182 +57,46 @@ dungeonSwords = [
     ["Infernal Judgement", 72, 80, 50, 0]
 ]
 
-SwordsDict = {
-    "Wooden Sword": {
-        "minDps": 4,
-        "maxDps": 7,
-        "levelReq": 1,
-        "price": 15,
-    },
-    "Rusty Iron Sword": {
-        "minDps": 7,
-        "maxDps": 12,
-        "levelReq": 3,
-        "price": 50
-    },
-    "Iron Shortsword": {
-        "minDps": 10,
-        "maxDps": 15,
-        "levelReq": 5,
-        "price": 120
-    },
-    "Steel Cutlass": {
-        "minDps": 12,
-        "maxDps": 18,
-        "levelReq": 7,
-        "price": 250
-    },
-    "Bandit's Saber": {
-        "minDps": 15,
-        "maxDps": 20,
-        "levelReq": 9,
-        "price": 400
-    },
-    "Shadowfang Blade": {
-        "minDps": 18,
-        "maxDps": 22,
-        "levelReq": 11,
-        "price": 600
-    },
-    "Venomous Rapier": {
-        "minDps": 20,
-        "maxDps": 25,
-        "levelReq": 13,
-        "price": 800
-    },
-    "Treant Cleaver": {
-        "minDps": 22,
-        "maxDps": 28,
-        "levelReq": 15,
-        "price": 1000
-    },
-    "Phantom Saber": {
-        "minDps": 25,
-        "maxDps": 30,
-        "levelReq": 17,
-        "price": 1400
-    },
-    "Nightfang Greatsword": {
-        "minDps": 28,
-        "maxDps": 32,
-        "levelReq": 19,
-        "price": 1800
-    },
-    "Frostbite Blade": {
-        "minDps": 30,
-        "maxDps": 35,
-        "levelReq": 21,
-        "price": 2500
-    },
-    "Glacial Edge": {
-        "minDps": 32,
-        "maxDps": 38,
-        "levelReq": 23,
-        "price": 3200
-    },
-    "Avalanche Cleaver": {
-        "minDps": 35,
-        "maxDps": 40,
-        "levelReq": 25,
-        "price": 4000
-    },
-    "Stormbreaker Sword": {
-        "minDps": 38,
-        "maxDps": 42,
-        "levelReq": 27,
-        "price": 4800
-    },
-    "Frozen Fang": {
-        "minDps": 40,
-        "maxDps": 45,
-        "levelReq": 29,
-        "price": 5500
-    },
-    "Stonecrusher Blade": {
-        "minDps": 42,
-        "maxDps": 48,
-        "levelReq": 31,
-        "price": 6000
-    },
-    "Serpent Fang Dagger": {
-        "minDps": 45,
-        "maxDps": 50,
-        "levelReq": 33,
-        "price": 6800
-    },
-    "Phantom Scimitar": {
-        "minDps": 48,
-        "maxDps": 52,
-        "levelReq": 35,
-        "price": 7500
-    },
-    "Explorer's Katana": {
-        "minDps": 50,
-        "maxDps": 55,
-        "levelReq": 37,
-        "price": 8500
-    },
-    "Crystal Cleaver": {
-        "minDps": 52,
-        "maxDps": 58,
-        "levelReq": 39,
-        "price": 9200
-    },
-    "Infernal Saber": {
-        "minDps": 55,
-        "maxDps": 60,
-        "levelReq": 41,
-        "price": 10000
-    },
-    "Molten Edge": {
-        "minDps": 58,
-        "maxDps": 62,
-        "levelReq": 43,
-        "price": 11500
-    },
-    "Blazefang Sword": {
-        "minDps": 60,
-        "maxDps": 65,
-        "levelReq": 45,
-        "price": 13000
-    },
-    "Hellfire Claymore": {
-        "minDps": 62,
-        "maxDps": 68,
-        "levelReq": 47,
-        "price": 15000
-    },
-    "Demon's Wrath": {
-        "minDps": 65,
-        "maxDps": 70,
-        "levelReq": 49,
-        "price": 18000
-    },
-    "Blade of the Verdant Guardian": {
-        "minDps": 18,
-        "maxDps": 24,
-        "levelReq": 10
-    },
-    "Nightshade Fang": {
-        "minDps": 30,
-        "maxDps": 36,
-        "levelReq": 20
-    },
-    "Glacier's Bite": {
-        "minDps": 45,
-        "maxDps": 52,
-        "levelReq": 30
-    },
-    "Crystal Reaver": {
-        "minDps": 58,
-        "maxDps": 65,
-        "levelReq": 40
-    },
-    "Infernal Judgement": {
-        "minDps": 72,
-        "maxDps": 80,
-        "levelReq": 50
+def makeSword(min_dps, max_dps, level_req, price):
+    sword = {
+        "minDps": min_dps,
+        "maxDps": max_dps,
+        "levelReq": level_req,
+        "price": price
     }
+    return sword
+
+SwordsDict = {
+    "Wooden Sword": makeSword(4, 7, 1, 15),
+    "Rusty Iron Sword": makeSword(7, 12, 3, 50),
+    "Iron Shortsword": makeSword(10, 15, 5, 120),
+    "Steel Cutlass": makeSword(12, 18, 7, 250),
+    "Bandit's Saber": makeSword(15, 20, 9, 400),
+    "Shadowfang Blade": makeSword(18, 22, 11, 600),
+    "Venomous Rapier": makeSword(20, 25, 13, 800),
+    "Treant Cleaver": makeSword(22, 28, 15, 1000),
+    "Phantom Saber": makeSword(25, 30, 17, 1400),
+    "Nightfang Greatsword": makeSword(28, 32, 19, 1800),
+    "Frostbite Blade": makeSword(30, 35, 21, 2500),
+    "Glacial Edge": makeSword(32, 38, 23, 3200),
+    "Avalanche Cleaver": makeSword(35, 40, 25, 4000),
+    "Stormbreaker Sword": makeSword(38, 42, 27, 4800),
+    "Frozen Fang": makeSword(40, 45, 29, 5500),
+    "Stonecrusher Blade": makeSword(42, 48, 31, 6000),
+    "Serpent Fang Dagger": makeSword(45, 50, 33,6800),
+    "Phantom Scimitar": makeSword(48 ,52 ,35 ,7500),
+    "Explorer's Katana": makeSword(50 ,55 ,37 ,8500),
+    "Crystal Cleaver": makeSword(52 ,58 ,39 ,9200),
+    "Infernal Saber": makeSword(55 ,60 ,41 ,10000),
+    "Molten Edge": makeSword(58 ,62 ,43 ,11500),
+    "Blazefang Sword": makeSword(60 ,65 ,45 ,13000),
+    "Hellfire Claymore": makeSword(62 ,68 ,47 ,15000),
+    "Demon's Wrath": makeSword(65 ,70 ,49 ,18000),
+    "Blade of the Verdant Guardian": makeSword(18, 24, 10, 0),
+    "Nightshade Fang": makeSword(30, 36, 20, 0),
+    "Glacier's Bite": makeSword(45, 52, 30, 0),
+    "Crystal Reaver": makeSword(58, 65, 40, 0),
+    "Infernal Judgement": makeSword(72, 80, 50, 0)
 }
 
 # armour = [name][damage reduction][levelrequired][price]
@@ -280,107 +144,36 @@ dungeonArmours = [
     ["Molten King's Mantle", 50, 50, 0] #Infernal Depths
 ]
 
+def makeArmour(dmg_red, level_req, price):
+    armour = {
+        "dmgRed": dmg_red,
+        "levelReq": level_req,
+        "price": price
+    }
+    return armour
+
 ArmourDict = {
-    "Cloth Scraps": {
-        "dmgRed": 0,
-        "levelReq": 0,
-        "price": 0
-    },
-    "Leather Vest": {
-        "dmgRed": 3,
-        "levelReq": 1,
-        "price": 50
-    },
-    "ChainMail Shirt": {
-        "dmgRed": 6,
-        "levelReq": 5,
-        "price": 200
-    },
-    "Iron Chestplate": {
-        "dmgRed": 9,
-        "levelReq": 9,
-        "price": 400
-    },
-    "Shadow Cloak": {
-        "dmgRed": 12,
-        "levelReq": 11,
-        "price": 600
-    },
-    "Reinforced Hide": {
-        "dmgRed": 16,
-        "levelReq": 15,
-        "price": 1000
-    },
-    "Darksteel Cloak": {
-        "dmgRed": 20,
-        "levelReq": 19,
-        "price": 1500
-    },
-    "Frostweave Coat": {
-        "dmgRed": 22,
-        "levelReq": 21,
-        "price": 2500
-    },
-    "Glacial Plate": {
-        "dmgRed": 26,
-        "levelReq": 25,
-        "price": 4000
-    },
-    "Avalanche Armour": {
-        "dmgRed": 30,
-        "levelReq": 29,
-        "price": 5500
-    },
-    "Phantom Robe": {
-        "dmgRed": 32,
-        "levelReq": 31,
-        "price": 6500
-    },
-    "Runed Plate": {
-        "dmgRed": 36,
-        "levelReq": 35,
-        "price": 8000
-    },
-    "Crystal Fortress": {
-        "dmgRed": 40,
-        "levelReq": 39,
-        "price": 10000
-    },
-    "Emberweave Cloak": {
-        "dmgRed": 42,
-        "levelReq": 41,
-        "price": 12000
-    },
-    "Infernal Shell": {
-        "dmgRed": 46,
-        "levelReq": 45,
-        "price": 15000
-    },
-    "Hellfire Plate": {
-        "dmgRed": 50,
-        "levelReq": 49,
-        "price": 18000
-    },
-    "Sentinel's Aegis": {
-        "dmgRed": 12,
-        "levelReq": 10
-    },
-    "Wraithbinder Vest": {
-        "dmgRed": 18,
-        "levelReq": 20
-    },
-    "Glacier Ward": {
-        "dmgRed": 28,
-        "levelReq": 30
-    },
-    "Echoing Plate": {
-        "dmgRed": 38,
-        "levelReq": 40
-    },
-    "Molten King's Mantle": {
-        "dmgRed": 50,
-        "levelReq": 50
-    },
+    "Cloth Scraps": makeArmour(0, 0, 0),
+    "Leather Vest": makeArmour(3, 1, 50),
+    "ChainMail Shirt": makeArmour(6, 5, 200),
+    "Iron Chestplate": makeArmour(9, 9, 400),
+    "Shadow Cloak": makeArmour(12, 11, 600),
+    "Reinforced Hide": makeArmour(16, 15, 1000),
+    "Darksteel Cuirass": makeArmour(20, 19, 1500),
+    "Frostweave Coat": makeArmour(22, 21, 2500),
+    "Glacial Plate": makeArmour(26, 25, 4000),
+    "Avalanche Armour": makeArmour(30, 29, 5500),
+    "Phantom Robe": makeArmour(32, 31, 6500),
+    "Runed Plate": makeArmour(36, 35, 8000),
+    "Crystal Fortress": makeArmour(40, 39, 10000),
+    "Emberweave Cloak": makeArmour(42, 41, 12000),
+    "Infernal Shell": makeArmour(46, 45, 15000),
+    "Hellfire Plate": makeArmour(50, 49, 18000),
+    "Sentinel's Aegis": makeArmour(12, 10, 0),
+    "Wraithbinder Vest": makeArmour(18, 20, 0),
+    "Glacier Ward": makeArmour(28, 30, 0),
+    "Echoing Plate": makeArmour(38, 40, 0),
+    "Molten King's Mantle": makeArmour(50, 50, 0)
 }
 
 healthPotions = [
@@ -392,25 +185,17 @@ healthPotions = [
     ["Superior Health Potion", 100, 60]
 ]
 
-healthDict = {
-    "Minor Health Potion": {
-        "amount": 10,
-        "price": 5
-    },
-    "Lesser Health Potion": {
-        "amount": 25,
-        "price": 12
-    },
-    "Health Potion": {
-        "amount": 50,
-        "price": 25
-    },
-    "Greater Health Potion": {
-        "amount": 75,
-        "price": 40
-    },
-    "Superior Health Potion": {
-        "amount": 100,
-        "price": 60
+def makeHealthPotion(amount, price):
+    healthPotion = {
+        "amount": amount,
+        "price": price
     }
+    return healthPotion
+
+healthDict = {
+    "Minor Health Potion": makeHealthPotion(10, 5),
+    "Lesser Health Potion": makeHealthPotion(25, 12),
+    "Health Potion": makeHealthPotion(50, 25),
+    "Greater Health Potion": makeHealthPotion(75, 40),
+    "Superior Health Potion": makeHealthPotion(100, 60)
 }

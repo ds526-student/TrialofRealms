@@ -2,7 +2,7 @@
 
 0-1. Cooldown on potions so they cannot be spammed endlessly ✔️
 
-0-2. Beastiary
+0-2. Beastiary ✔️
 
 0-3. Fix the xp calculation ✔️
 

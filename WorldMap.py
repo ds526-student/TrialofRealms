@@ -24,6 +24,6 @@ townList = [
     "Swords Smith",
     "Armourments Dealer", 
     "Potion Brewer",
-    "Dictionary",
+    "Beastiary",
     "Player Stats"
 ]
