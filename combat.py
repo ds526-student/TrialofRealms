@@ -1,6 +1,6 @@
 import Player
-import Enemy
-import itemsInfo
+import game_data.Enemy as Enemy
+import game_data.itemsInfo as itemsInfo
 
 def attack(minDmg, maxDmg):
     from random import randrange
@@ -147,19 +147,19 @@ def pickingDungeon():
 
         print("You have encountered " + str(dungeon[0]))
         printStats(enemyStats[1])
-        combatSit(dungeon[0][0], enemyStats[1])
+        combatSit(dungeon[0][0], enemyStats[1].copy)
 
         print("You have encountered " + str(dungeon[1]))
         printStats(enemyStats[2])
-        combatSit(dungeon[1][0], enemyStats[2])
+        combatSit(dungeon[1][0], enemyStats[2].copy)
 
         print("You have encountered " + str(dungeon[2]))
         printStats(enemyStats[3])
-        combatSit(dungeon[2][0], enemyStats[3])
+        combatSit(dungeon[2][0], enemyStats[3].copy)
 
         print("You have encountered " + str(dungeon[3]))
         printStats(enemyStats[5])
-        combatSit(dungeon[3][0], enemyStats[5])
+        combatSit(dungeon[3][0], enemyStats[5].copy)
 
         print("You have completed the dungeon")
     else:

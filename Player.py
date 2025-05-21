@@ -1,4 +1,4 @@
-import itemsInfo
+import game_data.itemsInfo as itemsInfo
 
 class playerStats:   
     maximumHealth = 100 

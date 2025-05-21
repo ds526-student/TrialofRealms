@@ -9,6 +9,17 @@ locationsList = [
     "Area Dungeons (Level 10-50)"
 ]
 
+displayLocationsList = [
+    "Open Inventory",
+    "Town",
+    "The Grasslands",
+    "The Dark Forest",
+    "The Frozen Peaks",
+    "The Lost Caves",
+    "The Burning Wastes",
+    "Area Dungeons"
+]
+
 townList = [
     "Swords Smith",
     "Armourments Dealer", 
