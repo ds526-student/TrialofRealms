@@ -14,18 +14,45 @@ def swordSmither():
     
     x = utils.get_valid_int("Please select a location: ", 1, len(WorldMap.locationsList) + 1, return_zero_based=True)
 
-    if x == 0:
-        y = itemsInfo.grasslandSwords
-    elif x == 1:
-        y = itemsInfo.darkForestSword
-    elif x == 2:
-        y = itemsInfo.frozenPeakSwords
-    elif x == 3:
-        y = itemsInfo.lostCaveSwords
-    elif x == 4:
-        y = itemsInfo.burningWasteSwords
-    elif x == 5:
-        return
+    if Player.playerStats.className == "Warrior":
+        if x == 0:
+            y = itemsInfo.grasslandSwords
+        elif x == 1:
+            y = itemsInfo.darkForestSword
+        elif x == 2:
+            y = itemsInfo.frozenPeakSwords
+        elif x == 3:
+            y = itemsInfo.lostCaveSwords
+        elif x == 4:
+            y = itemsInfo.burningWasteSwords
+        elif x == 5:
+            return
+    elif Player.playerStats.className == "Ranger":
+        if x == 0:
+            y = itemsInfo.grasslandBows
+        elif x == 1:
+            y = itemsInfo.darkForestBow
+        elif x == 2:
+            y = itemsInfo.frozenPeakBows
+        elif x == 3:
+            y = itemsInfo.lostCaveBows
+        elif x == 4:
+            y = itemsInfo.burningWasteBows
+        elif x == 5:
+            return
+    elif Player.playerStats.className == "Mage":
+        if x == 0:
+            y = itemsInfo.grasslandMagic
+        elif x == 1:
+            y = itemsInfo.darkForestMagic
+        elif x == 2:
+            y = itemsInfo.frozenPeakMagic
+        elif x == 3:
+            y = itemsInfo.lostCaveMagic
+        elif x == 4:
+            y = itemsInfo.burningWasteMagic
+        elif x == 5:
+            return
 
     
     #Prints the list of swords you can buy based on the area you selected
@@ -63,7 +90,7 @@ def swordSmither():
 
         # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
         Player.playerStats.inventory[str(y[buyItem][0])] = {
-            **itemsInfo.SwordsDict.get(str(y[buyItem][0]), {}),
+            **itemsInfo.weaponsDict.get(str(y[buyItem][0]), {}),
             "type": "sword"
         }
 

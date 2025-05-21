@@ -1,13 +1,14 @@
 import game_data.itemsInfo as itemsInfo
 
 class playerStats:   
+    className = ""
     maximumHealth = 100 
     health = 100 
     weapon = "Wooden Sword"
     armour = "Cloth Scraps"
-    damageReduction = itemsInfo.ArmourDict[armour]["dmgRed"]
-    # minimumDamage = itemsInfo.SwordsDict[weapon]["minDps"]
-    # maximumDamage = itemsInfo.SwordsDict[weapon]["maxDps"]
+    damageReduction = itemsInfo.armourDict[armour]["dmgRed"]
+    # minimumDamage = itemsInfo.weaponsDict[weapon]["minDps"]
+    # maximumDamage = itemsInfo.weaponsDict[weapon]["maxDps"]
     minimumDamage = 10000
     maximumDamage = 10001
     level = 50
@@ -55,7 +56,7 @@ def print_weapons():
     for item, details in playerStats.inventory.items():
         if details["type"] == "sword":
             if details["amount"] > 0:
-                print(f"{i}. {item}(dmg {itemsInfo.SwordsDict[item]['minDps']} -> {itemsInfo.SwordsDict[item]['maxDps']}) Required level {itemsInfo.SwordsDict[item]['levelReq']}: {details['amount']}")
+                print(f"{i}. {item}(dmg {itemsInfo.weaponsDict[item]['minDps']} -> {itemsInfo.weaponsDict[item]['maxDps']}) Required level {itemsInfo.weaponsDict[item]['levelReq']}: {details['amount']}")
                 i += 1
 
     print(str(i) + ". Cancel")

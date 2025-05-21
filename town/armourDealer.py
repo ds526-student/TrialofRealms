@@ -15,18 +15,45 @@ def amourmentsDealer():
 
     x = utils.get_valid_int("Please select a location: ", 1, len(WorldMap.locationsList) + 1, return_zero_based=True)
 
-    if x == 0:
-        y = itemsInfo.grasslandMeleeArmour
-    elif x == 1:
-        y = itemsInfo.darkForestMeleeArmour
-    elif x == 2:
-        y = itemsInfo.frozenPeakMeleeArmour
-    elif x == 3:
-        y = itemsInfo.lostCavesMeleeArmour
-    elif x == 4:
-        y = itemsInfo.burningWasteMeleeArmour
-    elif x == 5:
-        return
+    if Player.playerStats.className == "Warrior":
+        if x == 0:
+            y = itemsInfo.grasslandMeleeArmour
+        elif x == 1:
+            y = itemsInfo.darkForestMeleeArmour
+        elif x == 2:
+            y = itemsInfo.frozenPeakMeleeArmour
+        elif x == 3:
+            y = itemsInfo.lostCavesMeleeArmour
+        elif x == 4:
+            y = itemsInfo.burningWasteMeleeArmour
+        elif x == 5:
+            return
+    elif Player.playerStats.className == "Ranger":
+        if x == 0:
+            y = itemsInfo.grasslandRangedArmour
+        elif x == 1:
+            y = itemsInfo.darkForestRangedArmour
+        elif x == 2:
+            y = itemsInfo.frozenPeakRangedArmour
+        elif x == 3:
+            y = itemsInfo.lostCavesRangedArmour
+        elif x == 4:
+            y = itemsInfo.burningWasteRangedArmour
+        elif x == 5:
+            return
+    elif Player.playerStats.className == "Mage":
+        if x == 0:
+            y = itemsInfo.grasslandMageArmour
+        elif x == 1:
+            y = itemsInfo.darkForestMageArmour
+        elif x == 2:
+            y = itemsInfo.frozenPeakMageArmour
+        elif x == 3:
+            y = itemsInfo.lostCavesMageArmour
+        elif x == 4:
+            y = itemsInfo.burningWasteMageArmour
+        elif x == 5:
+            return
     
     #Prints the list of swords you can buy based on the area you selected
     Player.print_gold()

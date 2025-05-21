@@ -101,35 +101,35 @@ burrowEnemies = [
     grasslandEnemies[1],
     grasslandEnemies[2],
     grasslandEnemies[3],
-    "Ravaging Boar King (Level " + str(grasslandStats[5][3]) + ")"
+    "Ravaging Boar King"
 ]
 
 heartEnemies = [
     darkForestEnemies[1],
     darkForestEnemies[2],
     darkForestEnemies[3],
-    "Hallowborn Ent (Level " + str(darkForestStats[5][3]) + ")"
+    "Hallowborn Ent"
 ]
 
 cradleEnemies = [
     frozenPeaksEnemies[1],
     frozenPeaksEnemies[2],
     frozenPeaksEnemies[3],
-    "Stormbound Titan (Level " + str(frozenPeakStats[5][3]) + ")"
+    "Stormbound Titan"
 ]
 
 vaultEnemies = [
     lostCavesEnemies[1],
     lostCavesEnemies[2],
     lostCavesEnemies[3],
-    "Echoing Warden (Level " + str(lostCaveStats[5][3]) + ")"
+    "Echoing Warden"
 ]
 
 infernalEnemies = [
     burningWastesEnemies[1],
     burningWastesEnemies[2],
     burningWastesEnemies[3],
-    "Pyre Lord Azgarn (Level " + str(burningWastesStats[5][3]) + ")"
+    "Pyre Lord Azgarn"
 ]
 
 def makeEnemy(level, health, min_dps, max_dps, min_coins=None, max_coins=None):

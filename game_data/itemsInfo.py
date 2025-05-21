@@ -162,7 +162,8 @@ def makeWeapon(min_dps, max_dps, level_req, price):
     }
     return weapon
 
-SwordsDict = {
+weaponsDict = {
+    #Swords
     "Wooden Sword": makeWeapon(4, 7, 1, 15),
     "Rusty Iron Sword": makeWeapon(7, 12, 3, 50),
     "Iron Shortsword": makeWeapon(10, 15, 5, 120),
@@ -192,10 +193,9 @@ SwordsDict = {
     "Nightshade Fang": makeWeapon(30, 36, 20, 0),
     "Glacier's Bite": makeWeapon(45, 52, 30, 0),
     "Crystal Reaver": makeWeapon(58, 65, 40, 0),
-    "Infernal Judgement": makeWeapon(72, 80, 50, 0)
-}
+    "Infernal Judgement": makeWeapon(72, 80, 50, 0),
 
-rangedDict = {
+    #Ranged
     "Worn Bow": makeWeapon(3, 8, 1, 15),
     "Hunting Bow": makeWeapon(6, 13, 3, 50),
     "Short Recurve Bow": makeWeapon(9, 16, 5, 120),
@@ -225,10 +225,9 @@ rangedDict = {
     "Fangshot Crossbow": makeWeapon(28, 38, 20, 0),
     "Frozen Needle": makeWeapon(42, 54, 30, 0),
     "Crystal Repeater": makeWeapon(56, 68, 40, 0),
-    "Flamepiercer": makeWeapon(70, 84, 50, 0)
-}
+    "Flamepiercer": makeWeapon(70, 84, 50, 0),
 
-magicDict = {
+    #Magic
     "Cracked Wand": makeWeapon(6, 10, 1, 15),
     "Amber Wand": makeWeapon(9, 14, 3, 50),
     "Apprentice's Staff": makeWeapon(12, 18, 5, 120),
@@ -390,7 +389,8 @@ def makeArmour(dmg_red, level_req, price):
     }
     return armour
 
-meleeArmourDict = {
+armourDict = {
+    #Melee Armours
     "Cloth Scraps": makeArmour(0, 0, 0),
     "Leather Vest": makeArmour(3, 1, 50),
     "ChainMail Shirt": makeArmour(6, 5, 200),
@@ -411,11 +411,9 @@ meleeArmourDict = {
     "Wraithbinder Vest": makeArmour(18, 20, 0),
     "Glacier Ward": makeArmour(28, 30, 0),
     "Echoing Plate": makeArmour(38, 40, 0),
-    "Molten King's Mantle": makeArmour(50, 50, 0)
-}
+    "Molten King's Mantle": makeArmour(50, 50, 0),
 
-rangedArmourDict = {
-    "Cloth Scraps": makeArmour(0, 0, 0),
+    #Ranged Armours
     "Padded Leather": makeArmour(2, 1, 50),
     "Hunter's Vest": makeArmour(5, 5, 200),
     "Ranger's Jacket": makeArmour(8, 9, 400),
@@ -435,11 +433,9 @@ rangedArmourDict = {
     "Cloak of Shadowsight": makeArmour(17, 20, 0),
     "Arctic Hunter Gear": makeArmour(26, 30, 0),
     "Gloomwalker's Mantle": makeArmour(36, 40, 0),
-    "Inferno Sharpshooter Vest": makeArmour(48 ,50 ,0)
-}
+    "Inferno Sharpshooter Vest": makeArmour(48 ,50 ,0),
 
-mageArmourDict = {
-    "Cloth Scraps": makeArmour(0, 0, 0),
+    #Mage Armours
     "Tattered Robe": makeArmour(1, 1, 50),
     "Apprentice Robe": makeArmour(3, 5, 200),
     "Enchanted Wraps": makeArmour(5, 9, 400),

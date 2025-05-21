@@ -1,3 +1,5 @@
+import Player
+
 locationsList = [
     "Open Inventory",
     "Town",
@@ -20,10 +22,19 @@ displayLocationsList = [
     "Area Dungeons"
 ]
 
-townList = [
-    "Swords Smith",
-    "Armourments Dealer", 
-    "Potion Brewer",
-    "Beastiary",
-    "Player Stats"
-]
+def weaponsDealer():
+    if Player.playerStats.className == "Warrior":
+        return "Sword Smith"
+    elif Player.playerStats.className == "Ranger":
+        return "Fletcher"
+    elif Player.playerStats.className == "Mage":
+        return "Archmage"
+
+def get_town_list():
+    return [
+        weaponsDealer(),
+        "Armourments Dealer",
+        "Potion Brewer",
+        "Beastiary",
+        "Player Stats"
+    ]

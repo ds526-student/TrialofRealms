@@ -5,7 +5,7 @@ import combat
 import game_data.itemsInfo as itemsInfo
 import os
 import town.potionBrewer as potionBrewer
-import town.swordSmith as swordSmith
+import town.weaponSmith as weaponSmith
 import town.armourDealer as armourDealer
 import town.beastiary as beastiary
 import inventory
@@ -48,23 +48,24 @@ def town():
     print("Welcome to town! What would you like to do?")
 
     #Prints the list of things you can do in town
-    for i in range(0, len(WorldMap.townList)):
-        print(str(i + 1) +  ". " + WorldMap.townList[i])
+    town_list = WorldMap.get_town_list()
+    for i in range(0, len(town_list)):
+        print(str(i + 1) +  ". " + town_list[i])
         i += 1
 
     i += 1
     print(str(i) + ". Return")
 
-    x = utils.get_valid_int("Please select an activity: ", 1, len(WorldMap.townList) + 1, return_zero_based=True)
+    x = utils.get_valid_int("Please select an activity: ", 1, len(town_list) + 1, return_zero_based=True)
 
-    if x is len(WorldMap.townList) + 1:
+    if x is len(town_list) + 1:
         return
-    elif x >= 0 and x < len(WorldMap.townList) + 1:
-        print("You are now speaking to the " + WorldMap.townList[x])
+    elif x >= 0 and x < len(town_list) + 1:
+        print("You are now speaking to the " + town_list[x])
 
     # choose which shop you want to go to
     if x == 0:
-        swordSmith.swordSmither()
+        weaponSmith.swordSmither()
     elif x == 1:
         armourDealer.amourmentsDealer()
     elif x == 2:
@@ -73,6 +74,33 @@ def town():
         beastiary.beastLog()
     elif x == 4:
         playerStats()
+
+
+os.system('cls' if os.name == 'nt' else 'clear')
+print("Welcome to Trial of Realms!")
+print("You are a brave adventurer who has set out to explore the world of Trial of Realms.")
+print("You will encounter many enemies and challenges along the way.")
+print("You will need to use your skills and items to survive.")
+print()
+print("But first we need to select your class")
+print("You have 3 classes to choose from:")
+print("1. Warrior: A strong and durable fighter.")
+print("2. Mage: A powerful spellcaster.")
+print("3. Ranger: A skilled archer and hunter.")
+classSelection = utils.get_valid_int("Please select a class: ", 1, 4)
+if classSelection == 1:
+    Player.playerStats.className = "Warrior"
+    Player.playerStats.weapon = "Wooden Sword"
+if classSelection == 2:
+    Player.playerStats.className = "Mage"
+    Player.playerStats.weapon = "Cracked Wand"
+if classSelection == 3:
+    Player.playerStats.className = "Ranger"
+    Player.playerStats.weapon = "Worn Bow"
+print("You have selected " + Player.playerStats.className + "!")
+print("You are now ready to begin your adventure!")
+print("Good luck!")
+utils.enter()
 
 #forever loop so that the game never ends unless manually closed
 while True:

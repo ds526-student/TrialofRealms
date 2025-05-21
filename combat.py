@@ -124,6 +124,8 @@ def combatSit(initialHealth, enemyStats):
 
 
 def pickingDungeon():
+    global globalEnemyDict
+    global globalEnemyName
     #Prints the list of dungeons you can travel to
     for i in range(0, len(Enemy.dungeons)):
         print(str(i + 1) +  ". " + Enemy.dungeons[i])
@@ -132,41 +134,45 @@ def pickingDungeon():
     i += 1
     print(str(i) + ". Return")
     print("Pick a dungeon to fight")
-    x = int(input())
+    x = utils.get_valid_int("Please select a dungeon: ", 1, len(Enemy.dungeons) + 1, return_zero_based=True)
     print("This dungeon will contain these enemies:")
-    if x == 1:
+
+    # assigns the correct list of weapons and armours based on the players class
+
+    if x == 0:
         enemyStats = Enemy.grasslandStats
         dungeon = Enemy.burrowEnemies
-        swordReward = itemsInfo.dungeonSwords[0][0]   
-        armourReward = itemsInfo.dungeonArmours[0][0]
-        print(dungeon)
-    elif x == 2:
+        globalEnemyDict = Enemy.grasslandBeast
+    elif x == 1:
         enemyStats = Enemy.darkForestStats
         dungeon = Enemy.heartEnemies
-        swordReward = itemsInfo.dungeonSwords[1][0]
-        armourReward = itemsInfo.dungeonArmours[1][0]
-        print(dungeon)
-    elif x == 3:
+        globalEnemyDict = Enemy.darkForestBeast
+    elif x == 2:
         enemyStats = Enemy.frozenPeakStats
         dungeon = Enemy.cradleEnemies
-        swordReward = itemsInfo.dungeonSwords[2][0]   
-        armourReward = itemsInfo.dungeonArmours[2][0]
-        print(dungeon)
-    elif x == 4:
+        globalEnemyDict = Enemy.frozenPeakBeast
+    elif x == 3:
         enemyStats = Enemy.lostCaveStats
         dungeon = Enemy.vaultEnemies
-        swordReward = itemsInfo.dungeonSwords[3][0]   
-        armourReward = itemsInfo.dungeonArmours[3][0]
-        print(dungeon)
-    elif x == 5:
+        globalEnemyDict = Enemy.lostCaveBeast
+    elif x == 4:
         enemyStats = Enemy.burningWastesStats
         dungeon = Enemy.infernalEnemies
-        swordReward = itemsInfo.dungeonSwords[4][0]   
-        armourReward = itemsInfo.dungeonArmours[4][0]
-        print(dungeon)
-    elif x == len(Enemy.dungeons) + 1:
+        globalEnemyDict = Enemy.burningWastesBeast
+    elif x == len(Enemy.dungeons):
         return
-    
+
+    if Player.playerStats.className == "Warrior":
+        weaponReward = itemsInfo.dungeonSwords[x][0]   
+        armourReward = itemsInfo.dungeonMeleeArmours[x][0]
+    elif Player.playerStats.className == "Ranger":
+        weaponReward = itemsInfo.dungeonRanged[x][0]   
+        armourReward = itemsInfo.dungeonRangedArmours[x][0]
+    elif Player.playerStats.className == "Mage":
+        weaponReward = itemsInfo.dungeonMagic[x][0]   
+        armourReward = itemsInfo.dungeonMageArmours[x][0]
+        print(dungeon)
+
     y = utils.confirm("Would you like to enter the dungeon? (y/n) ")
 
     if y == "y":
@@ -174,30 +180,34 @@ def pickingDungeon():
 
         print("You have encountered " + str(dungeon[0]))
         printStats(enemyStats[1])
-        combatSit(dungeon[0][0], enemyStats[1].copy())
+        globalEnemyName = dungeon[0]
+        combatSit(dungeon[0], enemyStats[1].copy())
 
         print("You have encountered " + str(dungeon[1]))
         printStats(enemyStats[2])
-        combatSit(dungeon[1][0], enemyStats[2].copy())
+        globalEnemyName = dungeon[1]
+        combatSit(dungeon[1], enemyStats[2].copy())
 
         print("You have encountered " + str(dungeon[2]))
         printStats(enemyStats[3])
-        combatSit(dungeon[2][0], enemyStats[3].copy())
+        globalEnemyName = dungeon[2]
+        combatSit(dungeon[2], enemyStats[3].copy())
 
         print("You have encountered " + str(dungeon[3]))
         printStats(enemyStats[5])
-        combatSit(dungeon[3][0], enemyStats[5].copy())
+        globalEnemyName = dungeon[3]
+        combatSit(dungeon[3], enemyStats[5].copy())
 
         print("You have completed the dungeon")
-        print("You have received " + swordReward + " and " + armourReward)
+        print("You have received " + weaponReward + " and " + armourReward)
         # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
-        Player.playerStats.inventory[str(swordReward)] = {
-            **itemsInfo.SwordsDict.get(str(swordReward), {}),
+        Player.playerStats.inventory[str(weaponReward)] = {
+            **itemsInfo.weaponsDict.get(str(weaponReward), {}),
             "type": "sword"
         }
         
         Player.playerStats.inventory[str(armourReward)] = {
-            **itemsInfo.ArmourDict.get(str(armourReward), {}),
+            **itemsInfo.armourDict.get(str(armourReward), {}),
             "type": "armour"
         }   
         utils.enter()
