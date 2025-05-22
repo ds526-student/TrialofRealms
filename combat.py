@@ -1,5 +1,5 @@
-import Player
-import game_data.Enemy as Enemy
+import player
+import game_data.enemy as enemy
 import game_data.itemsInfo as itemsInfo
 import utils
 import town.beastiary as beastiary
@@ -40,20 +40,20 @@ def pickingEnemy(x):
     global globalEnemyDict
     print("Pick an enemy to fight")
     if x == 3:
-        globalEnemyDict = Enemy.grasslandBeast
-        enemyStats = enemySelection(Enemy.grasslandEnemies, Enemy.grasslandStats)
+        globalEnemyDict = enemy.grasslandBeast
+        enemyStats = enemySelection(enemy.grasslandEnemies, enemy.grasslandStats)
     elif x == 4:
-        globalEnemyDict = Enemy.darkForestBeast
-        enemyStats = enemySelection(Enemy.darkForestEnemies, Enemy.darkForestStats)
+        globalEnemyDict = enemy.darkForestBeast
+        enemyStats = enemySelection(enemy.darkForestEnemies, enemy.darkForestStats)
     elif x == 5:
-        globalEnemyDict = Enemy.frozenPeakBeast
-        enemyStats = enemySelection(Enemy.frozenPeaksEnemies, Enemy.frozenPeakStats)
+        globalEnemyDict = enemy.frozenPeakBeast
+        enemyStats = enemySelection(enemy.frozenPeaksEnemies, enemy.frozenPeakStats)
     elif x == 6:
-        globalEnemyDict = Enemy.lostCaveBeast
-        enemyStats = enemySelection(Enemy.lostCavesEnemies, Enemy.lostCaveStats)
+        globalEnemyDict = enemy.lostCaveBeast
+        enemyStats = enemySelection(enemy.lostCavesEnemies, enemy.lostCaveStats)
     elif x == 7:
-        globalEnemyDict = Enemy.burningWastesBeast
-        enemyStats = enemySelection(Enemy.burningWastesEnemies, Enemy.burningWastesStats)
+        globalEnemyDict = enemy.burningWastesBeast
+        enemyStats = enemySelection(enemy.burningWastesEnemies, enemy.burningWastesStats)
     
     initialHealth = enemyStats[0]
     return enemyStats, initialHealth
@@ -68,7 +68,7 @@ def combatSit(initialHealth, enemyStats):
         #Applies damage to the player and the enemy
         if action == "a":
             enemyDamage = attack(enemyStats[1], enemyStats[2])
-            playerDamage = attack(Player.playerStats.minimumDamage, Player.playerStats.maximumDamage)
+            playerDamage = attack(player.playerStats.minimumDamage, player.playerStats.maximumDamage)
 
             enemyStats[0] -= playerDamage
 
@@ -76,32 +76,32 @@ def combatSit(initialHealth, enemyStats):
                 print("Enemy Health: 0")
                 enemyDead = True
             else:
-                Player.playerStats.health -= enemyDamage
+                player.playerStats.health -= enemyDamage
                 #When enemy is dead set enemyDead = true
-                print("Player Health: " + str(Player.playerStats.health))
+                print("Player Health: " + str(player.playerStats.health))
                 print("Enemy Health: " + str(enemyStats[0]))
         elif action == "b":
             if cooldown > 0:
                 print("You cannot use a consumable yet")
                 continue
-            elif Player.playerStats.health == Player.playerStats.maximumHealth:
+            elif player.playerStats.health == player.playerStats.maximumHealth:
                 print("You are already at full health")
                 continue
             else:
-                Player.print_consumables()
+                player.print_consumables()
 
                 x = int(input()) - 1
 
                 if x == len(itemsInfo.healthPotions):
                     return
 
-                Player.playerStats.health += itemsInfo.healthPotions[x][1]
-                Player.playerStats.inventory[itemsInfo.healthPotions[x][0]]["amount"] -= 1
+                player.playerStats.health += itemsInfo.healthPotions[x][1]
+                player.playerStats.inventory[itemsInfo.healthPotions[x][0]]["amount"] -= 1
 
-                if Player.playerStats.health > Player.playerStats.maximumHealth:
-                    Player.playerStats.health = Player.playerStats.maximumHealth
+                if player.playerStats.health > player.playerStats.maximumHealth:
+                    player.playerStats.health = player.playerStats.maximumHealth
 
-                print("Player Health: " + str(Player.playerStats.health))
+                print("Player Health: " + str(player.playerStats.health))
                 print("Enemy Health: " + str(enemyStats[0]))
 
                 cooldown = 3
@@ -113,12 +113,12 @@ def combatSit(initialHealth, enemyStats):
     enemyStats[0] = initialHealth
     #If the enemy is dead provide players with xp and roll drops
     if enemyDead:
-        xpEarned = Player.xpCalc(Player.playerStats.level, enemyStats[3])
-        xpRequired = Player.addXp(xpEarned)
+        xpEarned = player.xpCalc(player.playerStats.level, enemyStats[3])
+        xpRequired = player.addXp(xpEarned)
         gold = loot(enemyStats[4], enemyStats[5])
-        Player.playerStats.inventory["gold"]["amount"] += gold
+        player.playerStats.inventory["gold"]["amount"] += gold
         print("The enemy dropped " + str(gold) + " gold")
-        Player.print_gold()
+        player.print_gold()
         utils.enter()
         beastiary.beastLogEntry(globalEnemyDict, globalEnemyName)
 
@@ -127,48 +127,48 @@ def pickingDungeon():
     global globalEnemyDict
     global globalEnemyName
     #Prints the list of dungeons you can travel to
-    for i in range(0, len(Enemy.dungeons)):
-        print(str(i + 1) +  ". " + Enemy.dungeons[i])
+    for i in range(0, len(enemy.dungeons)):
+        print(str(i + 1) +  ". " + enemy.dungeons[i])
         i += 1
 
     i += 1
     print(str(i) + ". Return")
     print("Pick a dungeon to fight")
-    x = utils.get_valid_int("Please select a dungeon: ", 1, len(Enemy.dungeons) + 1, return_zero_based=True)
+    x = utils.get_valid_int("Please select a dungeon: ", 1, len(enemy.dungeons) + 1, return_zero_based=True)
     print("This dungeon will contain these enemies:")
 
     # assigns the correct list of weapons and armours based on the players class
 
     if x == 0:
-        enemyStats = Enemy.grasslandStats
-        dungeon = Enemy.burrowEnemies
-        globalEnemyDict = Enemy.grasslandBeast
+        enemyStats = enemy.grasslandStats
+        dungeon = enemy.burrowEnemies
+        globalEnemyDict = enemy.grasslandBeast
     elif x == 1:
-        enemyStats = Enemy.darkForestStats
-        dungeon = Enemy.heartEnemies
-        globalEnemyDict = Enemy.darkForestBeast
+        enemyStats = enemy.darkForestStats
+        dungeon = enemy.heartEnemies
+        globalEnemyDict = enemy.darkForestBeast
     elif x == 2:
-        enemyStats = Enemy.frozenPeakStats
-        dungeon = Enemy.cradleEnemies
-        globalEnemyDict = Enemy.frozenPeakBeast
+        enemyStats = enemy.frozenPeakStats
+        dungeon = enemy.cradleEnemies
+        globalEnemyDict = enemy.frozenPeakBeast
     elif x == 3:
-        enemyStats = Enemy.lostCaveStats
-        dungeon = Enemy.vaultEnemies
-        globalEnemyDict = Enemy.lostCaveBeast
+        enemyStats = enemy.lostCaveStats
+        dungeon = enemy.vaultEnemies
+        globalEnemyDict = enemy.lostCaveBeast
     elif x == 4:
-        enemyStats = Enemy.burningWastesStats
-        dungeon = Enemy.infernalEnemies
-        globalEnemyDict = Enemy.burningWastesBeast
-    elif x == len(Enemy.dungeons):
+        enemyStats = enemy.burningWastesStats
+        dungeon = enemy.infernalEnemies
+        globalEnemyDict = enemy.burningWastesBeast
+    elif x == len(enemy.dungeons):
         return
 
-    if Player.playerStats.className == "Warrior":
+    if player.playerStats.className == "Warrior":
         weaponReward = itemsInfo.dungeonSwords[x][0]   
         armourReward = itemsInfo.dungeonMeleeArmours[x][0]
-    elif Player.playerStats.className == "Ranger":
+    elif player.playerStats.className == "Ranger":
         weaponReward = itemsInfo.dungeonRanged[x][0]   
         armourReward = itemsInfo.dungeonRangedArmours[x][0]
-    elif Player.playerStats.className == "Mage":
+    elif player.playerStats.className == "Mage":
         weaponReward = itemsInfo.dungeonMagic[x][0]   
         armourReward = itemsInfo.dungeonMageArmours[x][0]
         print(dungeon)
@@ -176,7 +176,7 @@ def pickingDungeon():
     y = utils.confirm("Would you like to enter the dungeon? (y/n) ")
 
     if y == "y":
-        print("You have entered the " + Enemy.dungeons[x - 1])
+        print("You have entered the " + enemy.dungeons[x - 1])
 
         print("You have encountered " + str(dungeon[0]))
         printStats(enemyStats[1])
@@ -201,12 +201,12 @@ def pickingDungeon():
         print("You have completed the dungeon")
         print("You have received " + weaponReward + " and " + armourReward)
         # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
-        Player.playerStats.inventory[str(weaponReward)] = {
+        player.playerStats.inventory[str(weaponReward)] = {
             **itemsInfo.weaponsDict.get(str(weaponReward), {}),
             "type": "sword"
         }
         
-        Player.playerStats.inventory[str(armourReward)] = {
+        player.playerStats.inventory[str(armourReward)] = {
             **itemsInfo.armourDict.get(str(armourReward), {}),
             "type": "armour"
         }   
@@ -217,4 +217,4 @@ def pickingDungeon():
 def printStats(enemy_stats):
     print(f"Level: {enemy_stats[3]} \nHealth: {enemy_stats[0]} \nMin Damage: {enemy_stats[1]} \nMax Damage: {enemy_stats[2]}")
     print()
-    print("Player (Level " + str(Player.playerStats.level) + ") \nHealth: " + str(Player.playerStats.health) + " \nMin Damage: " + str(Player.playerStats.minimumDamage) + " \nMax Damage: " + str(Player.playerStats.maximumDamage) + "\nDamage Reduction: " + str(Player.playerStats.damageReduction))
+    print("Player (Level " + str(player.playerStats.level) + ") \nHealth: " + str(player.playerStats.health) + " \nMin Damage: " + str(player.playerStats.minimumDamage) + " \nMax Damage: " + str(player.playerStats.maximumDamage) + "\nDamage Reduction: " + str(player.playerStats.damageReduction))

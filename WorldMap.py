@@ -1,4 +1,4 @@
-import Player
+import player
 
 locationsList = [
     "Open Inventory",
@@ -23,11 +23,11 @@ displayLocationsList = [
 ]
 
 def weaponsDealer():
-    if Player.playerStats.className == "Warrior":
+    if player.playerStats.className == "Warrior":
         return "Sword Smith"
-    elif Player.playerStats.className == "Ranger":
+    elif player.playerStats.className == "Ranger":
         return "Fletcher"
-    elif Player.playerStats.className == "Mage":
+    elif player.playerStats.className == "Mage":
         return "Archmage"
 
 def get_town_list():

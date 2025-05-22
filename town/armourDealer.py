@@ -1,5 +1,5 @@
-import WorldMap
-import Player
+import worldMap
+import player
 import game_data.itemsInfo as itemsInfo
 import utils
 
@@ -7,15 +7,15 @@ import utils
 def amourmentsDealer():
     print("For which area would you like to purchase your armour?")
     #Print the world locations to choose from
-    for i in range(2, len(WorldMap.locationsList) - 1):
-        print(str(i - 1) +  ". " + WorldMap.locationsList[i])
+    for i in range(2, len(worldMap.locationsList) - 1):
+        print(str(i - 1) +  ". " + worldMap.locationsList[i])
         i += 1
     
     print(str(i - 1) + ". Return")
 
-    x = utils.get_valid_int("Please select a location: ", 1, len(WorldMap.locationsList) + 1, return_zero_based=True)
+    x = utils.get_valid_int("Please select a location: ", 1, len(worldMap.locationsList) + 1, return_zero_based=True)
 
-    if Player.playerStats.className == "Warrior":
+    if player.playerStats.className == "Warrior":
         if x == 0:
             y = itemsInfo.grasslandMeleeArmour
         elif x == 1:
@@ -28,7 +28,7 @@ def amourmentsDealer():
             y = itemsInfo.burningWasteMeleeArmour
         elif x == 5:
             return
-    elif Player.playerStats.className == "Ranger":
+    elif player.playerStats.className == "Ranger":
         if x == 0:
             y = itemsInfo.grasslandRangedArmour
         elif x == 1:
@@ -41,7 +41,7 @@ def amourmentsDealer():
             y = itemsInfo.burningWasteRangedArmour
         elif x == 5:
             return
-    elif Player.playerStats.className == "Mage":
+    elif player.playerStats.className == "Mage":
         if x == 0:
             y = itemsInfo.grasslandMageArmour
         elif x == 1:
@@ -56,7 +56,7 @@ def amourmentsDealer():
             return
     
     #Prints the list of swords you can buy based on the area you selected
-    Player.print_gold()
+    player.print_gold()
 
     if len(y) == 0:
         print("There is no more armour available in this area")
@@ -80,20 +80,20 @@ def amourmentsDealer():
         print("You have cancelled your purchase")
         return
 
-    if Player.playerStats.inventory["gold"]["amount"] >= y[buyItem][3]:
-        Player.playerStats.inventory["gold"]["amount"] -= y[buyItem][3]
+    if player.playerStats.inventory["gold"]["amount"] >= y[buyItem][3]:
+        player.playerStats.inventory["gold"]["amount"] -= y[buyItem][3]
 
         # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
-        Player.playerStats.inventory[str(y[buyItem][0])] = {
+        player.playerStats.inventory[str(y[buyItem][0])] = {
             **itemsInfo.meleeArmourDict.get(str(y[buyItem][0]), {}),
             "type": "armour"
         }   
 
-        print(str(Player.playerStats.inventory[str(y[buyItem][0])]))
+        print(str(player.playerStats.inventory[str(y[buyItem][0])]))
 
         y.pop(buyItem)
 
-        Player.print_gold()
+        player.print_gold()
         print("You have purchased " + str(y[buyItem][0]) + " for " + str(y[buyItem][3]) + " gold")
         utils.enter()
     else:

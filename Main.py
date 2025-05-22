@@ -1,6 +1,5 @@
-import game_data.Enemy as Enemy
-import Player
-import WorldMap
+import player
+import worldMap
 import combat   
 import game_data.itemsInfo as itemsInfo
 import os
@@ -16,16 +15,16 @@ def traveling():
     print("Where would you like to travel to?")
 
     #Prints the list of places you can travel to 
-    for i in range(0, len(WorldMap.locationsList)):
-        print(str(i + 1) +  ". " + WorldMap.locationsList[i])
+    for i in range(0, len(worldMap.locationsList)):
+        print(str(i + 1) +  ". " + worldMap.locationsList[i])
         i += 1
 
-    x = utils.get_valid_int("Please select a location: ", 1, len(WorldMap.locationsList) + 1)
+    x = utils.get_valid_int("Please select a location: ", 1, len(worldMap.locationsList) + 1)
 
     #Checks to see if your input is within range of the list of possible places to travel
-    if x > 1 and x < len(WorldMap.locationsList) + 1:
+    if x > 1 and x < len(worldMap.locationsList) + 1:
         if x > 2:
-            print("Welcome to " + WorldMap.displayLocationsList[x - 1] + "!")
+            print("Welcome to " + worldMap.displayLocationsList[x - 1] + "!")
         return x
     elif x == 1:
         print("You have opened your inventory")
@@ -35,20 +34,20 @@ def traveling():
 
 #Prints all player stats to the user
 def playerStats():
-    print(str(Player.playerStats.health) + "/" + str(Player.playerStats.maximumHealth) + " health")
-    print("Weapon: " + Player.playerStats.weapon + " DPS: " + str(Player.playerStats.minimumDamage) + "->" + str(Player.playerStats.maximumDamage))
-    print("Armour: " + Player.playerStats.armour + " Damage Reduction: " + str(Player.playerStats.damageReduction))
-    print("Level " + str(Player.playerStats.level) + " " + str(Player.playerStats.xp) + "/" + str(int(100 * (Player.playerStats.level**1.5))) + "xp")
+    print(str(player.playerStats.health) + "/" + str(player.playerStats.maximumHealth) + " health")
+    print("Weapon: " + player.playerStats.weapon + " DPS: " + str(player.playerStats.minimumDamage) + "->" + str(player.playerStats.maximumDamage))
+    print("Armour: " + player.playerStats.armour + " Damage Reduction: " + str(player.playerStats.damageReduction))
+    print("Level " + str(player.playerStats.level) + " " + str(player.playerStats.xp) + "/" + str(int(100 * (player.playerStats.level**1.5))) + "xp")
     input()
 
 #Allows you to interact with the stuff in town
 def town():
-    Player.playerStats.health = Player.playerStats.maximumHealth
+    player.playerStats.health = player.playerStats.maximumHealth
     print("You have been healed to full health")
     print("Welcome to town! What would you like to do?")
 
     #Prints the list of things you can do in town
-    town_list = WorldMap.get_town_list()
+    town_list = worldMap.get_town_list()
     for i in range(0, len(town_list)):
         print(str(i + 1) +  ". " + town_list[i])
         i += 1
@@ -65,7 +64,7 @@ def town():
 
     # choose which shop you want to go to
     if x == 0:
-        weaponSmith.swordSmither()
+        weaponSmith.weaponSmith()
     elif x == 1:
         armourDealer.amourmentsDealer()
     elif x == 2:
@@ -87,17 +86,19 @@ print("You have 3 classes to choose from:")
 print("1. Warrior: A strong and durable fighter.")
 print("2. Mage: A powerful spellcaster.")
 print("3. Ranger: A skilled archer and hunter.")
-classSelection = utils.get_valid_int("Please select a class: ", 1, 4)
+
+classSelection = utils.get_valid_int("Please select a class: ", 1, 3)
 if classSelection == 1:
-    Player.playerStats.className = "Warrior"
-    Player.playerStats.weapon = "Wooden Sword"
+    player.playerStats.className = "Warrior"
+    player.playerStats.weapon = "Wooden Sword"
 if classSelection == 2:
-    Player.playerStats.className = "Mage"
-    Player.playerStats.weapon = "Cracked Wand"
+    player.playerStats.className = "Mage"
+    player.playerStats.weapon = "Cracked Wand"
 if classSelection == 3:
-    Player.playerStats.className = "Ranger"
-    Player.playerStats.weapon = "Worn Bow"
-print("You have selected " + Player.playerStats.className + "!")
+    player.playerStats.className = "Ranger"
+    player.playerStats.weapon = "Worn Bow"
+
+print("You have selected " + player.playerStats.className + "!")
 print("You are now ready to begin your adventure!")
 print("Good luck!")
 utils.enter()

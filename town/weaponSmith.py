@@ -1,20 +1,20 @@
-import WorldMap
-import Player
+import worldMap
+import player
 import game_data.itemsInfo as itemsInfo
 import utils
 
-def swordSmither():
+def weaponSmith():
     print("For which area would you like to purchase a weapon?")
     #Print the world locations to choose from
-    for i in range(2, len(WorldMap.locationsList) - 1):
-        print(str(i - 1) +  ". " + WorldMap.locationsList[i])
+    for i in range(2, len(worldMap.locationsList) - 1):
+        print(str(i - 1) +  ". " + worldMap.locationsList[i])
         i += 1
     
     print(str(i - 1) + ". Return")
     
-    x = utils.get_valid_int("Please select a location: ", 1, len(WorldMap.locationsList) + 1, return_zero_based=True)
+    x = utils.get_valid_int("Please select a location: ", 1, len(worldMap.locationsList) + 1, return_zero_based=True)
 
-    if Player.playerStats.className == "Warrior":
+    if player.playerStats.className == "Warrior":
         if x == 0:
             y = itemsInfo.grasslandSwords
         elif x == 1:
@@ -27,7 +27,7 @@ def swordSmither():
             y = itemsInfo.burningWasteSwords
         elif x == 5:
             return
-    elif Player.playerStats.className == "Ranger":
+    elif player.playerStats.className == "Ranger":
         if x == 0:
             y = itemsInfo.grasslandBows
         elif x == 1:
@@ -40,7 +40,7 @@ def swordSmither():
             y = itemsInfo.burningWasteBows
         elif x == 5:
             return
-    elif Player.playerStats.className == "Mage":
+    elif player.playerStats.className == "Mage":
         if x == 0:
             y = itemsInfo.grasslandMagic
         elif x == 1:
@@ -56,7 +56,7 @@ def swordSmither():
 
     
     #Prints the list of swords you can buy based on the area you selected
-    Player.print_gold()
+    player.print_gold()
 
     if y == itemsInfo.grasslandSwords and len(y) > 0 and y[0][0] == "Wooden Sword": 
         y.pop(0) 
@@ -85,21 +85,21 @@ def swordSmither():
         utils.enter()
         return
     
-    if Player.playerStats.inventory["gold"]["amount"] >= y[buyItem][4]:
-        Player.playerStats.inventory["gold"]["amount"] -= y[buyItem][4]
+    if player.playerStats.inventory["gold"]["amount"] >= y[buyItem][4]:
+        player.playerStats.inventory["gold"]["amount"] -= y[buyItem][4]
 
         # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
-        Player.playerStats.inventory[str(y[buyItem][0])] = {
+        player.playerStats.inventory[str(y[buyItem][0])] = {
             **itemsInfo.weaponsDict.get(str(y[buyItem][0]), {}),
             "type": "sword"
         }
 
-        print(str(Player.playerStats.inventory[str(y[buyItem][0])]))
+        print(str(player.playerStats.inventory[str(y[buyItem][0])]))
 
         y.pop(buyItem)
 
         # Add information from the dictionary with the same name
-        Player.print_gold()
+        player.print_gold()
         print("You have purchased " + str(y[buyItem][0]) + " for " + str(y[buyItem][4]) + " gold")
         utils.enter()
     else:
