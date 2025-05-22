@@ -11,7 +11,7 @@ class playerStats:
     # maximumDamage = itemsInfo.weaponsDict[weapon]["maxDps"]
     minimumDamage = 10000
     maximumDamage = 10001
-    critHitChance = 100
+    critHitChance = 10
     critHitDamage = 1.5
     level = 50
     xp = 0 

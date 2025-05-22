@@ -13,13 +13,12 @@
         - Skill Tree 
         - special attacks for each class
             Warrior
-            - shield for Warrior(additional defence)
+            - shield for Warrior(additional defence) ✔️
             Ranger
-            - special arrows for ranger(maybe non-consumable not sure)
+            - special arrows for ranger(maybe non-consumable not sure) ✔️
             Mage
-            - spell types
-            - runes
-            - crystals
+            - spell types ✔️
+            - runes ✔️
 
 2. Equipment Upgrades and Crafting - add skilling
     Allow the ability to upgrade/enchant gear 
