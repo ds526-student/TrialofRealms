@@ -91,12 +91,15 @@ classSelection = utils.get_valid_int("Please select a class: ", 1, 3)
 if classSelection == 1:
     player.playerStats.className = "Warrior"
     player.playerStats.weapon = "Wooden Sword"
+    itemsInfo.grasslandSwords.pop(0)
 if classSelection == 2:
     player.playerStats.className = "Mage"
     player.playerStats.weapon = "Cracked Wand"
+    itemsInfo.grasslandMagic.pop(0)
 if classSelection == 3:
     player.playerStats.className = "Ranger"
     player.playerStats.weapon = "Worn Bow"
+    itemsInfo.grasslandRanged.pop(0)
 
 print("You have selected " + player.playerStats.className + "!")
 print("You are now ready to begin your adventure!")

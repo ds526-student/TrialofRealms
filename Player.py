@@ -85,12 +85,36 @@ def print_inventory():
             details = details[0]
         if details["type"] == "sword":
             print(f"{item} | Damage = {details['minDps']}->{details['maxDps']} | level {details['levelReq']}")
+    print("----------")
     print("Armour:")
     for item, details in playerStats.inventory.items():
         if isinstance(details, list): 
             details = details[0]
         if details["type"] == "armour":
             print(f"{item}: | Damage Reduction = {details['dmgRed']} | level {details['levelReq']}")
+    print("----------")
+    if playerStats.className == "Warrior":
+        print("Shield:")
+        for item, details in playerStats.inventory.items():
+            if isinstance(details, list): 
+                details = details[0]
+            if details["type"] == "shield":
+                print(f"{item} | Damage Reduction = {details['dmgRed']} | level {details['levelReq']}")
+    elif playerStats.className == "Ranger":
+        print("Arrows:")
+        for item, details in playerStats.inventory.items():
+            if isinstance(details, list): 
+                details = details[0]
+            if details["type"] == "arrow":
+                print(f"{item} | Effect = {details['effect']} | level {details['levelReq']}")
+    elif playerStats.className == "Mage":
+        print("Tomes:")
+        for item, details in playerStats.inventory.items():
+            if isinstance(details, list): 
+                details = details[0]
+            if details["type"] == "tome":
+                print(f"{item} | Effect = {details['effect']} | level {details['levelReq']}")
+    print("----------")
     print("Consumables:")
     for item, details in playerStats.inventory.items():
         if details["type"] == "consumable" and details["amount"] > 0:

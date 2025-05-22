@@ -615,32 +615,32 @@ arrowsDict = {
 
 
 
-# runes = [name][damageType][bonusDamage(%)][levelrequired][price]
-runes = [
-    ["Nature Rune", "poison", 10, 1, 500],
-    ["Shadow Rune", "dark", 15, 11, 1000],
-    ["Frost Rune", "ice", 20, 21, 2000],
-    ["Earth Rune", "earth", 25, 31, 3500],
-    ["Fire Rune", "fire", 30, 41, 5000]
+# tomes = [name][damageType][bonusDamage(%)][levelrequired][price]
+tomes = [
+    ["Nature Tome", "poison", 10, 1, 500],
+    ["Shadow Tome", "dark", 15, 11, 1000],
+    ["Frost Tome", "ice", 20, 21, 2000],
+    ["Earth Tome", "earth", 25, 31, 3500],
+    ["Fire Tome", "fire", 30, 41, 5000]
 ]
 
 # creates a rune object
-def makeRune(damageType, bonusDamage, level_req, price):
-    rune = {
-        "damageType": damageType,
+def makeTome(effect, bonusDamage, level_req, price):
+    tome = {
+        "effect": effect,
         "bonusDamage": bonusDamage,
         "levelReq": level_req,
         "price": price
     }
-    return rune
+    return tome
 
 # a dictionary of runes
-runesDict = {
-    "Nature Rune": makeRune("Poison", 10, 1, 500),
-    "Shadow Rune": makeRune("Dark", 15, 11, 1000),
-    "Frost Rune": makeRune("Ice", 20, 21, 2000),
-    "Earth Rune": makeRune("Earth", 25, 31, 3500),
-    "Fire Rune": makeRune("Fire", 30, 41, 5000)
+tomeDict = {
+    "Nature Tome": makeTome ("Poison", 10, 1, 500),
+    "Shadow Tome": makeTome ("Dark", 15, 11, 1000),
+    "Frost Tome": makeTome ("Ice", 20, 21, 2000),
+    "Earth Tome": makeTome ("Earth", 25, 31, 3500),
+    "Fire Tome": makeTome ("Fire", 30, 41, 5000)
 }
 
 

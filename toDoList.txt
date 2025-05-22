@@ -20,6 +20,8 @@
             - spell types ✔️
             - runes ✔️
 
+            implement the damge and defense from the above items
+
 2. Equipment Upgrades and Crafting - add skilling
     Allow the ability to upgrade/enchant gear 
     Crafting equipment and potions

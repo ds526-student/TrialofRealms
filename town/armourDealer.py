@@ -64,7 +64,7 @@ def amourmentsDealer():
         return
     
     for i in range(0, len(y)):
-        print(str(i + 1) + ". " + str(y[i][0]) + " Price: " + str(y[i][3]) + " gold")
+        print(str(i + 1) + ". " + str(y[i][0]) + " Price: " + str(y[i][-1]) + " gold")
         i += 1
     print(str(i + 1) + ". Return")
     
@@ -73,19 +73,19 @@ def amourmentsDealer():
     if buyItem == len(y):
         return
             
-    print("You have selected " + str(y[buyItem][0]) + " for " + str(y[buyItem][3]) + " gold")
+    print("You have selected " + str(y[buyItem][0]) + " for " + str(y[buyItem][-1]) + " gold")
     print("This armour has a damage reduction of " + str(y[buyItem][1]) + " and a level requirement of " + str(y[buyItem][2]))
     x = input("Would you still like to purchase this item? (y/n) ")
     if x is not "y":
         print("You have cancelled your purchase")
         return
 
-    if player.playerStats.inventory["gold"]["amount"] >= y[buyItem][3]:
-        player.playerStats.inventory["gold"]["amount"] -= y[buyItem][3]
+    if player.playerStats.inventory["gold"]["amount"] >= y[buyItem][-1]:
+        player.playerStats.inventory["gold"]["amount"] -= y[buyItem][-1]
 
         # print(str(itemsInfo.ArmourDict["Leather vest"]["price"]))
         player.playerStats.inventory[str(y[buyItem][0])] = {
-            **itemsInfo.meleeArmourDict.get(str(y[buyItem][0]), {}),
+            **itemsInfo.armourDict.get(str(y[buyItem][0]), {}),
             "type": "armour"
         }   
 
@@ -94,7 +94,7 @@ def amourmentsDealer():
         y.pop(buyItem)
 
         player.print_gold()
-        print("You have purchased " + str(y[buyItem][0]) + " for " + str(y[buyItem][3]) + " gold")
+        print("You have purchased " + str(y[buyItem][0]) + " for " + str(y[buyItem][-1]) + " gold")
         utils.enter()
     else:
         print("You do not have enough gold to purchase this item")

@@ -81,6 +81,10 @@ def combatSit(initialHealth, enemyStats):
             enemyDamage = attack(enemyStats[1], enemyStats[2], 1)
             playerDamage = attack(player.playerStats.minimumDamage, player.playerStats.maximumDamage, damageMultiplier)
 
+            enemyDamage = enemyDamage - player.playerStats.damageReduction
+            if enemyDamage < 0:
+                enemyDamage = 0
+
 
             print("You hit the " + str(globalEnemyName) + " for " + str(playerDamage) + " damage")
             
