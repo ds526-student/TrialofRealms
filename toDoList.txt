@@ -6,42 +6,50 @@
 
 0-3. Fix the xp calculation ✔️
 
-1. Character Classes
-    Warrior/Mage/Ranger -> Additional Unique Abilities
+1. Character Classes + combat changes
     New weapons and armour for each class ✔️
-    Skill Tree 
+    - critical hits ✔️
+    Warrior/Mage/Ranger -> Additional Unique Abilities
+        - Skill Tree 
+        - special attacks for each class
+            Warrior
+            - shield for Warrior(additional defence)
+            Ranger
+            - special arrows for ranger(maybe non-consumable not sure)
+            Mage
+            - spell types
+            - runes
+            - crystals
 
-2. Random Encounters
-    Ambushes that force you to fight or have dialogue
-
-3. Equipment Upgrades and Crafting - add skilling
+2. Equipment Upgrades and Crafting - add skilling
     Allow the ability to upgrade/enchant gear 
     Crafting equipment and potions
 
-4. More town interactions
+3. More town interactions
     Add more shops
         - magic 
+        - fletcher
         - pets
         - jewelry
 
-5. Difficulty levels and/or hardcore
+4. Difficulty levels and/or hardcore
 
-6. Questing
+5. Questing
     kill x amount of this enemy for a reward
 
-7. More locations
+6. More locations
     more locations up to level 100
     this would include a new dungeon for each area 
 
-8. endgame dungeons    
+7. endgame dungeons    
     most powerful enemies in the game reside here
     need to complete each dungeon to get the gear necessary to do the next dungeon
 
-9. Achievements
+8. Achievements
 
-10. Save/Load System
+9. Save/Load System
 
-11. Visual Enhancements
+10. Visual Enhancements
     ASCII art for locations, enemies, and items
 
 

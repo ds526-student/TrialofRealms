@@ -7,13 +7,23 @@ import town.beastiary as beastiary
 globalEnemyDict = {}
 globalEnemyName = ""
 
-def attack(minDmg, maxDmg):
+def attack(minDmg, maxDmg, multiplier):
     from random import randrange
-    return randrange(minDmg, maxDmg)
+    basedmg = randrange(minDmg, maxDmg + 1)
+    return basedmg * multiplier
 
 def loot(minCoins, maxCoins):
     from random import randrange
     return randrange(minCoins, maxCoins)  
+
+def criticalHit(critChance):
+    from random import randrange
+    critHit = randrange(0, 100)
+    if critHit <= critChance:
+        print("Critical Hit!")
+        return player.playerStats.critHitDamage
+    else:
+        return 1
 
 #Select the enemy that you want to fight based on your location 
 def enemySelection(list, array):
@@ -67,15 +77,20 @@ def combatSit(initialHealth, enemyStats):
         action = input()
         #Applies damage to the player and the enemy
         if action == "a":
-            enemyDamage = attack(enemyStats[1], enemyStats[2])
-            playerDamage = attack(player.playerStats.minimumDamage, player.playerStats.maximumDamage)
+            damageMultiplier = criticalHit(player.playerStats.critHitChance)
+            enemyDamage = attack(enemyStats[1], enemyStats[2], 1)
+            playerDamage = attack(player.playerStats.minimumDamage, player.playerStats.maximumDamage, damageMultiplier)
 
+
+            print("You hit the " + str(globalEnemyName) + " for " + str(playerDamage) + " damage")
+            
             enemyStats[0] -= playerDamage
 
             if enemyStats[0] <= 0:
                 print("Enemy Health: 0")
                 enemyDead = True
             else:
+                print("The " + str(globalEnemyName) + " hit you for " + str(enemyDamage) + " damage")
                 player.playerStats.health -= enemyDamage
                 #When enemy is dead set enemyDead = true
                 print("Player Health: " + str(player.playerStats.health))
