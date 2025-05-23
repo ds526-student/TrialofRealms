@@ -1,6 +1,6 @@
 import player
 import worldMap
-import combat   
+import fighting.combat as combat   
 import game_data.itemsInfo as itemsInfo
 import os
 import town.potionBrewer as potionBrewer
@@ -38,8 +38,7 @@ def playerStats():
     print("Level " + str(player.playerStats.level) + " " + str(player.playerStats.xp) + "/" + str(int(100 * (player.playerStats.level**1.5))) + "xp")
     print(str(player.playerStats.health) + "/" + str(player.playerStats.maximumHealth) + " health")
     print("Weapon: " + player.playerStats.weapon + " DPS: " + str(player.playerStats.minimumDamage) + "->" + str(player.playerStats.maximumDamage))
-    if player.playerStats.shield != "placeholder":
-        print("Shield: " + player.playerStats.shield + " Damage Reduction: " + str(itemsInfo.armourDict[player.playerStats.shield]["dmgRed"]))
+    print("Shield: " + player.playerStats.shield + " Damage Reduction: " + str(itemsInfo.armourDict[player.playerStats.shield]["dmgRed"]))
     print("Armour: " + player.playerStats.armour + " Damage Reduction: " + str(itemsInfo.armourDict[player.playerStats.armour]["dmgRed"]))
     print("Total Damage Reduction: " + str(player.playerStats.damageReduction))
     input()

@@ -597,6 +597,7 @@ def makeArrow(effect, chance, damage, period, level_req, price):
 
 # a dictionary of arrows
 arrowsDict = {
+    "wooden arrow": makeArrow("Physical", 0, 0, 0, 0, 0),
     "Piercing Arrow": makeArrow("Pierce", 10, 0, 0, 2, 100),
     "Barbed Arrow": makeArrow("Bleed", 20, 5, 2, 7, 150),
     "Poisoned Arrow": makeArrow("Poison", 30, 5, 3, 12, 300),

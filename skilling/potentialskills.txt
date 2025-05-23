@@ -1,0 +1,11 @@
+fishing
+cooking
+mining
+smithing
+thieving
+fletching
+Crafting - ranger
+runecrafting
+herblore/potions
+agility - chance to dodge
+astrology - permanent buffs
