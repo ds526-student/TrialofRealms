@@ -34,10 +34,14 @@ def traveling():
 
 #Prints all player stats to the user
 def playerStats():
+    print("Class: " + player.playerStats.className)
+    print("Level " + str(player.playerStats.level) + " " + str(player.playerStats.xp) + "/" + str(int(100 * (player.playerStats.level**1.5))) + "xp")
     print(str(player.playerStats.health) + "/" + str(player.playerStats.maximumHealth) + " health")
     print("Weapon: " + player.playerStats.weapon + " DPS: " + str(player.playerStats.minimumDamage) + "->" + str(player.playerStats.maximumDamage))
-    print("Armour: " + player.playerStats.armour + " Damage Reduction: " + str(player.playerStats.damageReduction))
-    print("Level " + str(player.playerStats.level) + " " + str(player.playerStats.xp) + "/" + str(int(100 * (player.playerStats.level**1.5))) + "xp")
+    if player.playerStats.shield != "placeholder":
+        print("Shield: " + player.playerStats.shield + " Damage Reduction: " + str(itemsInfo.armourDict[player.playerStats.shield]["dmgRed"]))
+    print("Armour: " + player.playerStats.armour + " Damage Reduction: " + str(itemsInfo.armourDict[player.playerStats.armour]["dmgRed"]))
+    print("Total Damage Reduction: " + str(player.playerStats.damageReduction))
     input()
 
 #Allows you to interact with the stuff in town

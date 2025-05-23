@@ -493,6 +493,7 @@ armourDict = {
     "Molten King's Mantle": makeArmour(50, 50, 0, "armour", "Warrior"),
 
     #Shields
+    "placeholder": makeArmour(0, 0, 0, "shield", "Warrior"),
     "Worn Wooden Shield": makeArmour(2, 2, 25, "shield", "Warrior"),
     "Iron Buckler": makeArmour(4, 7, 75, "shield", "Warrior"),
     "Spiked Hide Shield": makeArmour(6, 12, 250, "shield", "Warrior"),
