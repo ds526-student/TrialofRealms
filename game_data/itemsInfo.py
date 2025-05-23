@@ -493,7 +493,7 @@ armourDict = {
     "Molten King's Mantle": makeArmour(50, 50, 0, "armour", "Warrior"),
 
     #Shields
-    "placeholder": makeArmour(0, 0, 0, "shield", "Warrior"),
+    "Broken Shield": makeArmour(0, 0, 0, "shield", "Warrior"),
     "Worn Wooden Shield": makeArmour(2, 2, 25, "shield", "Warrior"),
     "Iron Buckler": makeArmour(4, 7, 75, "shield", "Warrior"),
     "Spiked Hide Shield": makeArmour(6, 12, 250, "shield", "Warrior"),
@@ -559,28 +559,28 @@ armourDict = {
 
 # specialArrows = [name][effect][chance][damage][period][levelrequired][price] - consumable arrows
 grasslandArrows = [
-    ["Piercing Arrow", "Pierce", 10, 0, 0, 2, 5],
-    ["Barbed Arrow", "Bleed", 20, 5, 2, 7, 7]
+    ["Piercing Arrow", "Pierce", 10, 0, 0, 2, 100],
+    ["Barbed Arrow", "Bleed", 20, 5, 2, 7, 150]
 ]
 
 darkForestArrows = [
-    ["Poisoned Arrow", "Poison", 30, 5, 3, 12, 15],
-    ["Splinter Arrow", "Split", 40, 25, 0, 17, 20]
+    ["Poisoned Arrow", "Poison", 30, 5, 3, 12, 300],
+    ["Splinter Arrow", "Split", 40, 25, 0, 17, 400]
 ]
 
 frozenPeakArrows = [
-    ["Frost Arrow", "Freeze", 20, 0, 1, 22, 25],
-    ["Chilling Arrow", "Slow", 100, 0, 3, 27, 35]
+    ["Frost Arrow", "Freeze", 20, 0, 1, 22, 600],
+    ["Chilling Arrow", "Slow", 100, 0, 3, 27, 800]
 ]
 
 lostCavesArrows = [
-    ["Blinding Arrow", "Blind", 20, 0, 2, 32, 45],
-    ["Explosive Arrow", "Pierce", 20, 0, 0, 37, 60]
+    ["Blinding Arrow", "Blind", 20, 0, 2, 32, 1000],
+    ["Explosive Arrow", "Pierce", 20, 0, 0, 37, 1300]
 ]
 
 burningWasteArrows = [
-    ["Scorching Arrow", "Bleed", 100, 10, 3, 42, 75],
-    ["Piercer Bolts", "Pierce", 40, 0, 0, 47, 90]
+    ["Scorching Arrow", "Bleed", 100, 10, 3, 42, 1600],
+    ["Piercer Bolts", "Pierce", 40, 0, 0, 47, 2000]
 ]
 
 # creates an arrow object
@@ -597,16 +597,16 @@ def makeArrow(effect, chance, damage, period, level_req, price):
 
 # a dictionary of arrows
 arrowsDict = {
-    "Piercing Arrow": makeArrow("Pierce", 10, 0, 0, 2, 5),
-    "Barbed Arrow": makeArrow("Bleed", 20, 5, 2, 7, 7),
-    "Poisoned Arrow": makeArrow("Poison", 30, 5, 3, 12, 15),
-    "Splinter Arrow": makeArrow("Split", 40, 25, 0, 17, 20),
-    "Frost Arrow": makeArrow("Freeze", 20, 0, 1, 22, 25),
-    "Chilling Arrow": makeArrow("Slow", 100, 0, 3, 27, 35),
-    "Blinding Arrow": makeArrow("Blind", 20, 0, 2, 32, 45),
-    "Explosive Arrow": makeArrow("Pierce", 20, 0, 0, 37, 60),
-    "Scorching Arrow": makeArrow("Bleed", 100, 10, 3, 42, 75),
-    "Piercer Bolts": makeArrow("Pierce",40 ,0 ,0 ,47 ,90)
+    "Piercing Arrow": makeArrow("Pierce", 10, 0, 0, 2, 100),
+    "Barbed Arrow": makeArrow("Bleed", 20, 5, 2, 7, 150),
+    "Poisoned Arrow": makeArrow("Poison", 30, 5, 3, 12, 300),
+    "Splinter Arrow": makeArrow("Split", 40, 25, 0, 17, 400),
+    "Frost Arrow": makeArrow("Freeze", 20, 0, 1, 22, 600),
+    "Chilling Arrow": makeArrow("Slow", 100, 0, 3, 27, 800),
+    "Blinding Arrow": makeArrow("Blind", 20, 0, 2, 32, 1000),
+    "Explosive Arrow": makeArrow("Pierce", 20, 0, 0, 37, 1300),
+    "Scorching Arrow": makeArrow("Bleed", 100, 10, 3, 42, 1600),
+    "Piercer Bolts": makeArrow("Pierce", 40, 0, 0, 47, 2000)
 }
 
 
@@ -637,6 +637,7 @@ def makeTome(effect, bonusDamage, level_req, price):
 
 # a dictionary of runes
 tomeDict = {
+    "Old Leather Tome": makeTome("written", 0, 0, 0),
     "Nature Tome": makeTome ("Poison", 10, 1, 500),
     "Shadow Tome": makeTome ("Dark", 15, 11, 1000),
     "Frost Tome": makeTome ("Ice", 20, 21, 2000),

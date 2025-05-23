@@ -6,7 +6,9 @@ class playerStats:
     health = 100 
     weapon = "Wooden Sword"
     armour = "Cloth Scraps"
-    shield = "placeholder"
+    shield = "Broken Shield"
+    tome = "Old Leather Tome"
+    arrow = "Wooden Arrow"
     damageReduction = itemsInfo.armourDict[armour]["dmgRed"] + itemsInfo.armourDict[shield]["dmgRed"]
     minimumDamage = itemsInfo.weaponsDict[weapon]["minDps"]
     maximumDamage = itemsInfo.weaponsDict[weapon]["maxDps"]
@@ -61,41 +63,30 @@ def print_gold():
 def print_inventory():
     print("Inventory:")
     print("----------")
-    print("Weapons:")
-    for item, details in playerStats.inventory.items():
-        if isinstance(details, list): 
-            details = details[0]
-        if details["type"] == "sword":
-            print(f"{item} | Damage = {details['minDps']}->{details['maxDps']} | level {details['levelReq']}")
-    print("----------")
-    print("Armour:")
-    for item, details in playerStats.inventory.items():
-        if isinstance(details, list): 
-            details = details[0]
-        if details["type"] == "armour":
-            print(f"{item}: | Damage Reduction = {details['dmgRed']} | level {details['levelReq']}")
-    print("----------")
+    def print_category(category_name, item_type, extra_fields=None):
+        print(f"{category_name}:")
+        for item, details in playerStats.inventory.items():
+            if isinstance(details, list):
+                details = details[0]
+            if details["type"] == item_type:
+                extra = ""
+                if extra_fields:
+                    extra = " | " + " | ".join(f"{field.capitalize()} = {details[field]}" for field in extra_fields)
+                print(f"{item}{extra}")
+        print("----------")
+
+    print_category("Weapons", "sword", ["minDps", "maxDps", "levelReq"])
+    print_category("Armour", "armour", ["dmgRed", "levelReq"])
+
     if playerStats.className == "Warrior":
-        print("Shield:")
-        for item, details in playerStats.inventory.items():
-            if isinstance(details, list): 
-                details = details[0]
-            if details["type"] == "shield":
-                print(f"{item} | Damage Reduction = {details['dmgRed']} | level {details['levelReq']}")
+        print_category("Shield", "shield", ["dmgRed", "levelReq"])
+
     elif playerStats.className == "Ranger":
-        print("Arrows:")
-        for item, details in playerStats.inventory.items():
-            if isinstance(details, list): 
-                details = details[0]
-            if details["type"] == "arrow":
-                print(f"{item} | Effect = {details['effect']} | level {details['levelReq']}")
+        print_category("Arrows", "arrow", ["effect", "levelReq"])
+
     elif playerStats.className == "Mage":
-        print("Tomes:")
-        for item, details in playerStats.inventory.items():
-            if isinstance(details, list): 
-                details = details[0]
-            if details["type"] == "tome":
-                print(f"{item} | Effect = {details['effect']} | level {details['levelReq']}")
+        print_category("Tomes", "tome", ["effect", "levelReq"])
+
     print("----------")
     print("Consumables:")
     for item, details in playerStats.inventory.items():

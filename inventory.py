@@ -10,114 +10,108 @@ def openInventory():
     if x == "y":
         print("weapon, armour or off-hand? (w/a/o)")
         x = input()
-        if x == "w":
-            print("You currently have " + player.playerStats.weapon + " equipped")
-            swordList = []  
-            equipmentList = []
+        def equip_item(item_type, equipped_attr, dict_ref, display_fields, category_name, update_stats_fn):
+            print(f"You currently have {getattr(player.playerStats, equipped_attr)} equipped")
+            printList = []
+            equipList = []
             i = 0
             for item, details in player.playerStats.inventory.items():
-                if isinstance(details, dict) and details.get('type') == 'sword':
-                    swordList.append(f"{i + 1} - {item}: Min DPS: {details.get('minDps', 'N/A')} Max DPS: {details.get('maxDps', 'N/A')}")
-                    i += 1  
-                    equipmentList.append(item)
-            if len(swordList) == 0:
-                print("You have no swords in your inventory")
-                utils.enter()
-                return
-            
-            print("Which item would you like to equip?")
-
-            for item in swordList:
-                print(item)
-
-            x = utils.get_valid_int("Please select an item: ", 1, len(swordList) + 1, return_zero_based=True)
-
-            item = equipmentList[x]
-            if itemsInfo.weaponsDict[item]["levelReq"] > player.playerStats.level:
-                print("You are not a high enough level to equip this item")
-            else:
-                player.playerStats.inventory[player.playerStats.weapon] = {
-                    **itemsInfo.weaponsDict.get(player.playerStats.weapon, {}),
-                    "type": "sword"
-                }   
-                
-                player.playerStats.weapon = item
-                player.playerStats.minimumDamage = itemsInfo.weaponsDict[item]["minDps"]
-                player.playerStats.maximumDamage = itemsInfo.weaponsDict[item]["maxDps"]
-                
-                del player.playerStats.inventory[item]
-            
-        elif x == "a":
-            print("You currently have " + player.playerStats.armour + " equipped")
-            armourList = []
-            equipmentList = []
-            i = 0
-            for item, details in player.playerStats.inventory.items():
-                if isinstance(details, dict) and details.get('type') == 'armour':
-                    armourList.append(f"{i + 1} - {item}: Damage Reduction: {details.get('dmgRed', 'N/A')}")
-                    equipmentList.append(item)
+                if isinstance(details, dict) and details.get('type') == item_type:
+                    display_str = f"{i + 1} - {item}: " + " ".join(
+                        f"{field}: {details.get(field, 'N/A')}" for field in display_fields
+                    )
+                    printList.append(display_str)
+                    equipList.append(item)
                     i += 1
-            if len(armourList) == 0:
-                print("You have no armour in your inventory")
+
+            if len(printList) == 0:
+                print("You have no " + category_name + " to equip")
                 utils.enter()
                 return
             
             print("Which item would you like to equip?")
 
-            for item in armourList:
+            for item in printList:
                 print(item)
 
-            x = utils.get_valid_int("Please select an item: ", 1, len(armourList) + 1, return_zero_based=True)
+            x = utils.get_valid_int("Please select an item: ", 1, len(printList) + 1, return_zero_based=True)
 
-            item = equipmentList[x]
-            if itemsInfo.armourDict[item]["levelReq"] > player.playerStats.level:
+            item = equipList[x]
+
+            if item is None:
+                return
+
+            if dict_ref[item]["levelReq"] > player.playerStats.level:
                 print("You are not a high enough level to equip this item")
             else:
-                player.playerStats.armour = item
-                player.playerStats.damageReduction = itemsInfo.armourDict[item]["dmgRed"]
+                # Put currently equipped item back into inventory
+                player.playerStats.inventory[getattr(player.playerStats, equipped_attr)] = {
+                    **dict_ref.get(getattr(player.playerStats, equipped_attr), {}),
+                    "type": item_type
+                }
+                setattr(player.playerStats, equipped_attr, item)
+                update_stats_fn(item)
+                del player.playerStats.inventory[item]
+
+        if x == "w":
+            equip_item(
+                item_type="sword",
+                equipped_attr="weapon",
+                dict_ref=itemsInfo.weaponsDict,
+                display_fields=["minDps", "maxDps"],
+                category_name="swords",
+                update_stats_fn=lambda item: (
+                    setattr(player.playerStats, "minimumDamage", itemsInfo.weaponsDict[item]["minDps"]),
+                    setattr(player.playerStats, "maximumDamage", itemsInfo.weaponsDict[item]["maxDps"])
+                )
+            )
+        elif x == "a":
+            equip_item(
+                item_type="armour",
+                equipped_attr="armour",
+                dict_ref=itemsInfo.armourDict,
+                display_fields=["dmgRed"],
+                category_name="armour",
+                update_stats_fn=lambda item: setattr(
+                    player.playerStats,
+                    "damageReduction",
+                    itemsInfo.armourDict[item]["dmgRed"] + itemsInfo.armourDict[player.playerStats.shield]["dmgRed"]
+                )
+            )
         elif x == "o":  
             if player.playerStats.className == "Warrior":
-                warriorOffhand()
+                equip_item(
+                    item_type="shield",
+                    equipped_attr="shield",
+                    dict_ref=itemsInfo.armourDict,
+                    display_fields=["dmgRed"],
+                    category_name="shields",
+                    update_stats_fn=lambda item: setattr(
+                        player.playerStats,
+                        "damageReduction",
+                        itemsInfo.armourDict[item]["dmgRed"] + itemsInfo.armourDict[player.playerStats.armour]["dmgRed"]
+                    )
+                )
+            elif player.playerStats.className == "Mage":
+                equip_item(
+                    item_type="tome",
+                    equipped_attr="tome",
+                    dict_ref=itemsInfo.weaponsDict,
+                    display_fields=["minDps", "maxDps"],
+                    category_name="tomes",
+                    update_stats_fn=lambda item: (
+                        setattr(player.playerStats, "minimumDamage", itemsInfo.weaponsDict[item]["minDps"]),
+                        setattr(player.playerStats, "maximumDamage", itemsInfo.weaponsDict[item]["maxDps"])
+                    )
+                )
+            elif player.playerStats.className == "Ranger":
+                equip_item(
+                    item_type="arrow",
+                    equipped_attr="arrow",
+                    dict_ref=itemsInfo.weaponsDict,
+                    display_fields=["effect"],
+                    category_name="arrows",
+                    update_stats_fn=lambda item: setattr(player.playerStats, "effect", itemsInfo.weaponsDict[item]["effect"])
+                )
         else:
             return
-    equipmentList.clear()
-    i = 0
-
-def warriorOffhand():
-    if player.playerStats.shield == "placeholder":
-        print("You currently have no shield equipped")
-    else:
-        print("You currently have " + player.playerStats.shield + " equipped")
-
-    shieldList = []
-    equipmentList = []
-    i = 0
-
-    for item, details in player.playerStats.inventory.items():
-        print(item)
-        print(details)
-        print(details.get('type'))
-        if details.get('type') == 'shield':
-            print("Found a shield in list")
-            shieldList.append(f"{i} - {item}: Damage Reduction: {details.get('dmgRed', 'N/A')}")
-            i += 1  
-            equipmentList.append(item)
-    if len(shieldList) == 0:
-        print("You have no shields in your inventory")
-        utils.enter()
-        return
-    print("Which item would you like to equip?")
-    player.playerStats.inventory[player.playerStats.shield] = {
-        **itemsInfo.armourDict.get(player.playerStats.shield, {}),
-        "type": "shield"
-    }
-
-    x = utils.get_valid_int("Please select an item: ", 1, len(shieldList) + 1, return_zero_based=True)
-
-    item = equipmentList[x]
-    if itemsInfo.armourDict[item]["levelReq"] > player.playerStats.level:
-        print("You are not a high enough level to equip this item")
-    else:
-        player.playerStats.shield = equipmentList[x]
-        equippedArmour = player.playerStats.armour
-        player.playerStats.damageReduction = itemsInfo.armourDict[item]["dmgRed"] + itemsInfo.armourDict[equippedArmour]["dmgRed"]
