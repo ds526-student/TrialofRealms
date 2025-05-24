@@ -3,6 +3,11 @@ import player
 locationsList = [
     "Open Inventory",
     "Town",
+    "Skilling",
+    "Combat Areas"
+]
+
+combatAreasLevels = [
     "The Grasslands (Level 1-10)",
     "The Dark Forest (Level 11-20)",
     "The Frozen Peaks (Level 21-30)",
@@ -11,9 +16,7 @@ locationsList = [
     "Area Dungeons (Level 10-50)"
 ]
 
-displayLocationsList = [
-    "Open Inventory",
-    "Town",
+combatAreas = [
     "The Grasslands",
     "The Dark Forest",
     "The Frozen Peaks",
@@ -38,3 +41,4 @@ def get_town_list():
         "Beastiary",
         "Player Stats"
     ]
+

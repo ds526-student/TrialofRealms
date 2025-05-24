@@ -41,7 +41,7 @@ def openInventory():
             if item is None:
                 return
 
-            if dict_ref[item]["levelReq"] > player.playerStats.level:
+            if dict_ref[item]["levelReq"] > player.playerStats.playerLevel:
                 print("You are not a high enough level to equip this item")
             else:
                 # Put currently equipped item back into inventory

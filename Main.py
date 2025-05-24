@@ -9,6 +9,7 @@ import town.armourDealer as armourDealer
 import town.beastiary as beastiary
 import inventory
 import utils    
+import skilling.skillSelection as skillSelection
 
 #Select the location you would like to travel to 
 def traveling():
@@ -24,7 +25,7 @@ def traveling():
     #Checks to see if your input is within range of the list of possible places to travel
     if x > 1 and x < len(worldMap.locationsList) + 1:
         if x > 2:
-            print("Welcome to " + worldMap.displayLocationsList[x - 1] + "!")
+            print("Welcome to " + worldMap.locationsList[x - 1] + "!")
         return x
     elif x == 1:
         print("You have opened your inventory")
@@ -35,7 +36,7 @@ def traveling():
 #Prints all player stats to the user
 def playerStats():
     print("Class: " + player.playerStats.className)
-    print("Level " + str(player.playerStats.level) + " " + str(player.playerStats.xp) + "/" + str(int(100 * (player.playerStats.level**1.5))) + "xp")
+    print("Level " + str(player.playerStats.playerLevel) + " " + str(player.playerStats.xp) + "/" + str(int(100 * (player.playerStats.playerLevel**1.5))) + "xp")
     print(str(player.playerStats.health) + "/" + str(player.playerStats.maximumHealth) + " health")
     print("Weapon: " + player.playerStats.weapon + " DPS: " + str(player.playerStats.minimumDamage) + "->" + str(player.playerStats.maximumDamage))
     print("Shield: " + player.playerStats.shield + " Damage Reduction: " + str(itemsInfo.armourDict[player.playerStats.shield]["dmgRed"]))
@@ -114,12 +115,11 @@ while True:
     #Clears the console
     os.system('cls' if os.name == 'nt' else 'clear')
     x = traveling()
-    if x == 8:
-        combat.pickingDungeon()
-    elif x >= 3:
-        enemyStats, initialHealth = combat.pickingEnemy(x)
-        combat.combatSit(initialHealth, enemyStats) 
+    if x == 1:
+        inventory.openInventory()
     elif x == 2:
         town()
-    elif x == 1:
-        inventory.openInventory()
+    elif x == 3:
+        skillSelection.skillsSelect()
+    elif x == 4:
+        combat.pickingCombatArea()

@@ -14,11 +14,20 @@ class playerStats:
     maximumDamage = itemsInfo.weaponsDict[weapon]["maxDps"]
     # minimumDamage = 10000
     # maximumDamage = 10001
+
+
     critHitChance = 10
     critHitDamage = 1.5
-    level = 50
-    maxLevel = 50
-    xp = 0 
+
+
+    playerLevel = 50
+    playerXp = 0 
+
+    woodCuttingLevel = 1
+    woodCuttingXp = 0
+
+
+    maxLevel = 99
 
     inventory = {
         "gold": {
@@ -97,21 +106,21 @@ def print_inventory():
 
 
 def addXp(xpEarned):
-    if playerStats.level >= playerStats.maxLevel:
+    if playerStats.playerLevel >= playerStats.maxLevel:
         return
-    elif playerStats.level < playerStats.maxLevel:
-        xpRequired = int(100 * (playerStats.level**1.5))
-        playerStats.xp += xpEarned
-        print("You earned " + str(playerStats.xp))
-        while playerStats.xp >= xpRequired:
-            playerStats.xp % xpRequired
-            playerStats.level += 1
-            print("You Leveled up! You are now level " + str(playerStats.level))
-            playerStats.xp -= xpRequired
-            xpRequired = int(100 * (playerStats.level**1.5))
+    elif playerStats.playerLevel < playerStats.maxLevel:
+        xpRequired = int(100 * (playerStats.playerLevel**1.5))
+        playerStats.playerXp += xpEarned
+        print("You earned " + str(playerStats.playerXp))
+        while playerStats.playerXp >= xpRequired:
+            playerStats.playerXp % xpRequired
+            playerStats.playerLevel += 1
+            print("You Leveled up! You are now level " + str(playerStats.playerLevel))
+            playerStats.playerXp -= xpRequired
+            xpRequired = int(100 * (playerStats.playerLevel**1.5))
             playerStats.health = playerStats.maximumHealth
 
-    print("current experience (" + str(playerStats.xp) + "/" + str(xpRequired) + ")")
+    print("current experience (" + str(playerStats.playerXp) + "/" + str(xpRequired) + ")")
     return xpRequired
 
 def xpCalc(pLevel, eLevel):

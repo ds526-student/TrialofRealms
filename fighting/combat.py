@@ -3,6 +3,7 @@ import game_data.enemy as enemy
 import game_data.itemsInfo as itemsInfo
 import utils
 import town.beastiary as beastiary
+import worldMap
 
 globalEnemyDict = {}
 globalEnemyName = ""
@@ -49,19 +50,19 @@ def enemySelection(list, array):
 def pickingEnemy(x):
     global globalEnemyDict
     print("Pick an enemy to fight")
-    if x == 3:
+    if x == 0:
         globalEnemyDict = enemy.grasslandBeast
         enemyStats = enemySelection(enemy.grasslandEnemies, enemy.grasslandStats)
-    elif x == 4:
+    elif x == 1:
         globalEnemyDict = enemy.darkForestBeast
         enemyStats = enemySelection(enemy.darkForestEnemies, enemy.darkForestStats)
-    elif x == 5:
+    elif x == 2:
         globalEnemyDict = enemy.frozenPeakBeast
         enemyStats = enemySelection(enemy.frozenPeaksEnemies, enemy.frozenPeakStats)
-    elif x == 6:
+    elif x == 3:
         globalEnemyDict = enemy.lostCaveBeast
         enemyStats = enemySelection(enemy.lostCavesEnemies, enemy.lostCaveStats)
-    elif x == 7:
+    elif x == 4:
         globalEnemyDict = enemy.burningWastesBeast
         enemyStats = enemySelection(enemy.burningWastesEnemies, enemy.burningWastesStats)
     
@@ -83,7 +84,7 @@ def combatSit(initialHealth, enemyStats):
 
             enemyDamage = enemyDamage - player.playerStats.damageReduction
             if enemyDamage < 0:
-                enemyDamage = 0
+                enemyDamage = 1
 
 
             print("You hit the " + str(globalEnemyName) + " for " + str(playerDamage) + " damage")
@@ -132,7 +133,7 @@ def combatSit(initialHealth, enemyStats):
     enemyStats[0] = initialHealth
     #If the enemy is dead provide players with xp and roll drops
     if enemyDead:
-        xpEarned = player.xpCalc(player.playerStats.level, enemyStats[3])
+        xpEarned = player.xpCalc(player.playerStats.playerLevel, enemyStats[3])
         xpRequired = player.addXp(xpEarned)
         gold = loot(enemyStats[4], enemyStats[5])
         player.playerStats.inventory["gold"]["amount"] += gold
@@ -158,28 +159,19 @@ def pickingDungeon():
 
     # assigns the correct list of weapons and armours based on the players class
 
-    if x == 0:
-        enemyStats = enemy.grasslandStats
-        dungeon = enemy.burrowEnemies
-        globalEnemyDict = enemy.grasslandBeast
-    elif x == 1:
-        enemyStats = enemy.darkForestStats
-        dungeon = enemy.heartEnemies
-        globalEnemyDict = enemy.darkForestBeast
-    elif x == 2:
-        enemyStats = enemy.frozenPeakStats
-        dungeon = enemy.cradleEnemies
-        globalEnemyDict = enemy.frozenPeakBeast
-    elif x == 3:
-        enemyStats = enemy.lostCaveStats
-        dungeon = enemy.vaultEnemies
-        globalEnemyDict = enemy.lostCaveBeast
-    elif x == 4:
-        enemyStats = enemy.burningWastesStats
-        dungeon = enemy.infernalEnemies
-        globalEnemyDict = enemy.burningWastesBeast
-    elif x == len(enemy.dungeons):
+    if x == len(enemy.dungeons):
         return
+
+    dungeon_data = [
+        (enemy.grasslandStats, enemy.burrowEnemies, enemy.grasslandBeast),
+        (enemy.darkForestStats, enemy.heartEnemies, enemy.darkForestBeast),
+        (enemy.frozenPeakStats, enemy.cradleEnemies, enemy.frozenPeakBeast),
+        (enemy.lostCaveStats, enemy.vaultEnemies, enemy.lostCaveBeast),
+        (enemy.burningWastesStats, enemy.infernalEnemies, enemy.burningWastesBeast),
+    ]
+
+    if 0 <= x < len(dungeon_data):
+        enemyStats, dungeon, globalEnemyDict = dungeon_data[x]
 
     if player.playerStats.className == "Warrior":
         weaponReward = itemsInfo.dungeonSwords[x][0]   
@@ -192,30 +184,16 @@ def pickingDungeon():
         armourReward = itemsInfo.dungeonMageArmours[x][0]
         print(dungeon)
 
-    y = utils.confirm("Would you like to enter the dungeon? (y/n) ")
+    y = utils.confirm("Would you like to enter the dungeon? (y/n): ")
 
     if y == "y":
         print("You have entered the " + enemy.dungeons[x - 1])
 
-        print("You have encountered " + str(dungeon[0]))
-        printStats(enemyStats[1])
-        globalEnemyName = dungeon[0]
-        combatSit(dungeon[0], enemyStats[1].copy())
-
-        print("You have encountered " + str(dungeon[1]))
-        printStats(enemyStats[2])
-        globalEnemyName = dungeon[1]
-        combatSit(dungeon[1], enemyStats[2].copy())
-
-        print("You have encountered " + str(dungeon[2]))
-        printStats(enemyStats[3])
-        globalEnemyName = dungeon[2]
-        combatSit(dungeon[2], enemyStats[3].copy())
-
-        print("You have encountered " + str(dungeon[3]))
-        printStats(enemyStats[5])
-        globalEnemyName = dungeon[3]
-        combatSit(dungeon[3], enemyStats[5].copy())
+        for i in range(0, len(dungeon)):
+            print("You have encountered " + str(dungeon[i]))
+            printStats(enemyStats[i + 1])
+            globalEnemyName = dungeon[i]
+            combatSit(dungeon[i], enemyStats[i + 1].copy())
 
         print("You have completed the dungeon")
         print("You have received " + weaponReward + " and " + armourReward)
@@ -236,4 +214,24 @@ def pickingDungeon():
 def printStats(enemy_stats):
     print(f"Level: {enemy_stats[3]} \nHealth: {enemy_stats[0]} \nMin Damage: {enemy_stats[1]} \nMax Damage: {enemy_stats[2]}")
     print()
-    print("Player (Level " + str(player.playerStats.level) + ") \nHealth: " + str(player.playerStats.health) + " \nMin Damage: " + str(player.playerStats.minimumDamage) + " \nMax Damage: " + str(player.playerStats.maximumDamage) + "\nDamage Reduction: " + str(player.playerStats.damageReduction))
+    print("Player (Level " + str(player.playerStats.playerLevel) + ") \nHealth: " + str(player.playerStats.health) + " \nMin Damage: " + str(player.playerStats.minimumDamage) + " \nMax Damage: " + str(player.playerStats.maximumDamage) + "\nDamage Reduction: " + str(player.playerStats.damageReduction))
+
+def pickingCombatArea():
+    print("Pick a combat area to fight")
+    for i in range(0, len(worldMap.combatAreas)):
+        print(str(i + 1) +  ". " + worldMap.combatAreas[i])
+        i += 1
+
+    i += 1
+    print(str(i) + ". Return")
+
+    x = utils.get_valid_int("Please select a combat area: ", 1, len(worldMap.combatAreas) + 1, return_zero_based=True)
+
+    if x == len(worldMap.combatAreas) - 1:
+        pickingDungeon()
+    elif x == len(worldMap.combatAreas):
+        return
+    else:
+        print("You have now entered the " + str(worldMap.combatAreas[x]))
+        enemyStats, initialHealth = pickingEnemy(x)
+        combatSit(initialHealth, enemyStats) 
