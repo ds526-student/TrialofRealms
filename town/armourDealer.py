@@ -7,13 +7,13 @@ import utils
 def amourmentsDealer():
     print("For which area would you like to purchase your armour?")
     #Print the world locations to choose from
-    for i in range(2, len(worldMap.locationsList) - 1):
-        print(str(i - 1) +  ". " + worldMap.locationsList[i])
+    for i in range(0, len(worldMap.combatAreas)):
+        print(str(i - 1) +  ". " + worldMap.combatAreas[i])
         i += 1
     
     print(str(i - 1) + ". Return")
 
-    x = utils.get_valid_int("Please select a location: ", 1, len(worldMap.locationsList) + 1, return_zero_based=True)
+    x = utils.get_valid_int("Please select a location: ", 1, len(worldMap.combatAreas) + 1, return_zero_based=True)
 
     if player.playerStats.className == "Warrior":
         if x == 0:

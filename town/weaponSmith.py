@@ -23,13 +23,13 @@ def weaponSmith():
     if x == 0:
         print("For which area would you like to purchase a weapon?")
         #Print the world locations to choose from
-        for i in range(0, len(worldMap.combatAreas) - 1):
-            print(str(i - 1) +  ". " + worldMap.locationsList[i])
+        for i in range(0, len(worldMap.combatAreas)):
+            print(str(i + 1) +  ". " + worldMap.combatAreas[i])
             i += 1
         
-        print(str(i - 1) + ". Return")
+        print(str(i + 1) + ". Return")
         
-        x = utils.get_valid_int("Please select a location: ", 1, len(worldMap.locationsList) + 1, return_zero_based=True)
+        x = utils.get_valid_int("Please select a location: ", 1, len(worldMap.combatAreas) + 1, return_zero_based=True)
 
         class_weapon_map = {
             "Warrior": [
@@ -63,7 +63,7 @@ def weaponSmith():
     
     elif x == 1:
         #Print the world locations to choose from
-        for i in range(2, len(worldMap.combatAreas) - 1):
+        for i in range(0, len(worldMap.combatAreas) - 1):
             print(str(i - 1) +  ". " + worldMap.locationsList[i])
             i += 1
         if player.playerStats.className == "Warrior":
