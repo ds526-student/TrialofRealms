@@ -36,7 +36,7 @@ def traveling():
 #Prints all player stats to the user
 def playerStats():
     print("Class: " + player.playerStats.className)
-    print("Level " + str(player.playerStats.playerLevel) + " " + str(player.playerStats.xp) + "/" + str(int(100 * (player.playerStats.playerLevel**1.5))) + "xp")
+    print("Level " + str(player.playerStats.playerLevel) + " " + str(player.playerStats.playerXp) + "/" + str(int(100 * (player.playerStats.playerLevel**1.5))) + "xp")
     print(str(player.playerStats.health) + "/" + str(player.playerStats.maximumHealth) + " health")
     print("Weapon: " + player.playerStats.weapon + " DPS: " + str(player.playerStats.minimumDamage) + "->" + str(player.playerStats.maximumDamage))
     print("Shield: " + player.playerStats.shield + " Damage Reduction: " + str(itemsInfo.armourDict[player.playerStats.shield]["dmgRed"]))

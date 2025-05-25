@@ -25,6 +25,8 @@ class playerStats:
 
     woodCuttingLevel = 1
     woodCuttingXp = 0
+    axe = "Wooden Axe"
+    axeDamage = 1
 
 
     maxLevel = 99
