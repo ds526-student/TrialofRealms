@@ -31,31 +31,28 @@ class playerStats:
 
     maxLevel = 99
 
+    def addLoot(amount = 0, type = "loot"):
+        return {
+            "amount": amount,
+            "type": type
+            }
+
     inventory = {
-        "gold": {
-            "amount": 100000000,
-            "type" : "loot"
-        },
-        "Minor Health Potion": {
-            "amount": 10,
-            "type" : "consumable"
-        },
-        "Lesser Health Potion": {
-            "amount": 0,
-            "type" : "consumable"
-        },
-        "Health Potion": {
-            "amount": 0,
-            "type" : "consumable"
-        },
-        "Greater Health Potion": {
-            "amount": 0,
-            "type" : "consumable"
-        },
-        "Superior Health Potion": {
-            "amount": 0,
-            "type" : "consumable"
-        }
+        "gold": addLoot(10000000),
+        "Minor Health Potion": addLoot(10, "consumable"),
+        "Lesser Health Potion": addLoot(0, "consumable"),
+        "Health Potion": addLoot(0, "consumable"),
+        "Greater Health Potion": addLoot(0, "consumable"),
+        "Superior Health Potion": addLoot(0, "consumable"),
+        "Normal Log": addLoot(0, "log"),
+        "Oak Log": addLoot(0, "log"),
+        "Willow Log": addLoot(0, "log"),
+        "Teak Log": addLoot(0, "log"),
+        "Maple Log": addLoot(0, "log"),
+        "Mahogany Log": addLoot(0, "log"),
+        "Yew Log": addLoot(0, "log"),
+        "Magic Log": addLoot(0, "log"),
+        "Redwood Log": addLoot(0, "log"),
     }
     
 def print_consumables():

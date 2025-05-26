@@ -43,6 +43,8 @@ def woodCutting(treeName, health, xp, logType):
         
 
     print("The tree has fallen")
+    player.playerStats.inventory[logType]["amount"] += 1
+    print(player.playerStats.inventory[logType]["amount"], logType + "s in your inventory")
     calcXp(player.playerStats.woodCuttingXp, xp)
 
 def equipAxe():
@@ -67,29 +69,3 @@ def treeSelect():
         error_message="You are not a high enough level to cut down this tree",
         next_method=woodCutting
     )
-
-    # print("Select a tree to cut down")
-
-    # for i in range(0, len(skillsInfo.trees)):
-    #     print(str(i + 1) + ". " + skillsInfo.trees[i][0] + " (Level required: " + str(skillsInfo.trees[i][1]) + ")")
-
-    # i += 2
-    # print(str(i) + ". Equip an axe")
-    # i += 1
-    # print(str(i) + ". Return")
-
-    # x = utils.get_valid_int("Please select a tree: ", 1, len(skillsInfo.trees) + 1, return_zero_based=True)
-
-    # if x == len(skillsInfo.trees) + 1:
-    #     return
-    # elif x == len(skillsInfo.trees):
-    #     equipAxe()
-    #     return
-    # else:
-    #     if player.playerStats.woodCuttingLevel < skillsInfo.trees[x][1]:
-    #         print("You are not a high enough level to cut down this tree")
-    #         utils.enter()
-    #         return
-    #     else:
-    #         woodCutting(skillsInfo.trees[x][0], skillsInfo.trees[x][2], skillsInfo.trees[x][3], skillsInfo.trees[x][4])
-

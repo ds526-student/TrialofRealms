@@ -18,6 +18,18 @@
 
 # chance for the line to break
 # this depends on the fishing rod and level of the fishing area
+import skilling.skillsUtils as skillsUtils
+import player
+import game_data.skillsInfo as skillsInfo
 
 def areaSelect():
-    print("Select a fishing area:")
+    skillsUtils.areaSelect(
+        method_name=areaSelect,
+        initial_message="Select a fishing area",
+        location_list=skillsInfo.fishingAreas,
+        equip_method=equipFishingRod,
+        item_type="fishing rod",
+        item_name="fishing rod",
+        error_message="You are not high enough level to fish here.",
+        next_method=fishing
+    )
