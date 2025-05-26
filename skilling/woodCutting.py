@@ -5,6 +5,7 @@ import random
 import utils
 import player
 import game_data.skillsInfo as skillsInfo
+import inventory
 
 def calcXp(currentXp, xpEarned):
     xpNeeded = xpToNextLevel()
@@ -30,12 +31,17 @@ def treeSelect():
     for i in range(0, len(skillsInfo.trees)):
         print(str(i + 1) + ". " + skillsInfo.trees[i][0] + " (Level required: " + str(skillsInfo.trees[i][1]) + ")")
 
+    i += 2
+    print(str(i) + ". Equip an axe")
     i += 1
-    print(str(i + 1) + ". Return")
+    print(str(i) + ". Return")
 
     x = utils.get_valid_int("Please select a tree: ", 1, len(skillsInfo.trees) + 1, return_zero_based=True)
 
-    if x == len(skillsInfo.trees):
+    if x == len(skillsInfo.trees) + 1:
+        return
+    elif x == len(skillsInfo.trees):
+        equipAxe()
         return
     else:
         if player.playerStats.woodCuttingLevel < skillsInfo.trees[x][1]:
@@ -64,3 +70,14 @@ def woodCutting(treeName, health, xp, logType):
 
     print("The tree has fallen")
     calcXp(player.playerStats.woodCuttingXp, xp)
+
+def equipAxe():
+    print("Select an axe to equip")
+    inventory.equip_item(
+        item_type="axe",
+        equipped_attr="axe",
+        dict_ref=skillsInfo.axesDict,
+        display_fields=["damage"],
+        category_name="axes",
+        update_stats_fn=lambda item: setattr(player.playerStats, "axeDamage", skillsInfo.axesDict[item]["damage"])
+    )

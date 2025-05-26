@@ -10,48 +10,6 @@ def openInventory():
     if x == "y":
         print("weapon, armour or off-hand? (w/a/o)")
         x = input()
-        def equip_item(item_type, equipped_attr, dict_ref, display_fields, category_name, update_stats_fn):
-            print(f"You currently have {getattr(player.playerStats, equipped_attr)} equipped")
-            printList = []
-            equipList = []
-            i = 0
-            for item, details in player.playerStats.inventory.items():
-                if isinstance(details, dict) and details.get('type') == item_type:
-                    display_str = f"{i + 1} - {item}: " + " ".join(
-                        f"{field}: {details.get(field, 'N/A')}" for field in display_fields
-                    )
-                    printList.append(display_str)
-                    equipList.append(item)
-                    i += 1
-
-            if len(printList) == 0:
-                print("You have no " + category_name + " to equip")
-                utils.enter()
-                return
-            
-            print("Which item would you like to equip?")
-
-            for item in printList:
-                print(item)
-
-            x = utils.get_valid_int("Please select an item: ", 1, len(printList) + 1, return_zero_based=True)
-
-            item = equipList[x]
-
-            if item is None:
-                return
-
-            if dict_ref[item]["levelReq"] > player.playerStats.playerLevel:
-                print("You are not a high enough level to equip this item")
-            else:
-                # Put currently equipped item back into inventory
-                player.playerStats.inventory[getattr(player.playerStats, equipped_attr)] = {
-                    **dict_ref.get(getattr(player.playerStats, equipped_attr), {}),
-                    "type": item_type
-                }
-                setattr(player.playerStats, equipped_attr, item)
-                update_stats_fn(item)
-                del player.playerStats.inventory[item]
 
         if x == "w":
             equip_item(
@@ -115,3 +73,47 @@ def openInventory():
                 )
         else:
             return
+        
+        
+def equip_item(item_type, equipped_attr, dict_ref, display_fields, category_name, update_stats_fn):
+    print(f"You currently have {getattr(player.playerStats, equipped_attr)} equipped")
+    printList = []
+    equipList = []
+    i = 0
+    for item, details in player.playerStats.inventory.items():
+        if isinstance(details, dict) and details.get('type') == item_type:
+            display_str = f"{i + 1} - {item}: " + " ".join(
+                f"{field}: {details.get(field, 'N/A')}" for field in display_fields
+            )
+            printList.append(display_str)
+            equipList.append(item)
+            i += 1
+
+    if len(printList) == 0:
+        print("You have no " + category_name + " to equip")
+        utils.enter()
+        return
+    
+    print("Which item would you like to equip?")
+
+    for item in printList:
+        print(item)
+
+    x = utils.get_valid_int("Please select an item: ", 1, len(printList) + 1, return_zero_based=True)
+
+    item = equipList[x]
+
+    if item is None:
+        return
+
+    if dict_ref[item]["levelReq"] > player.playerStats.playerLevel:
+        print("You are not a high enough level to equip this item")
+    else:
+        # Put currently equipped item back into inventory
+        player.playerStats.inventory[getattr(player.playerStats, equipped_attr)] = {
+            **dict_ref.get(getattr(player.playerStats, equipped_attr), {}),
+            "type": item_type
+        }
+        setattr(player.playerStats, equipped_attr, item)
+        update_stats_fn(item)
+        del player.playerStats.inventory[item]

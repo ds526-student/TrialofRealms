@@ -28,5 +28,34 @@ trees = [
 
 # axes = [name, levelRequired, damage]
 axes = [
-    ["Wooden Axe", 1, 1]
+    ["Wooden Axe", 1, 1],
+    ["Bronze Axe", 15, 2],
+    ["Iron Axe", 30, 4],
+    ["Steel Axe", 35, 5],
+    ["Mithril Axe", 45, 6],
+    ["Adamant Axe", 50, 7],
+    ["Rune Axe", 60, 8],
+    ["Dragon Axe", 75, 10],
+    ["Infernal Axe", 90, 12]
 ]
+
+# creates an axe object
+def makeAxe(level_required, damage, type="axe"):
+    return {
+        "levelReq": level_required,
+        "damage": damage,
+        "type": type
+    }   
+
+# a dictionary of axes
+axesDict = {
+    "Wooden Axe": makeAxe(1, 1),
+    "Bronze Axe": makeAxe(15, 2),
+    "Iron Axe": makeAxe(30, 4),
+    "Steel Axe": makeAxe(35, 5),
+    "Mithril Axe": makeAxe(45, 6),
+    "Adamant Axe": makeAxe(50, 7),
+    "Rune Axe": makeAxe(60, 8),
+    "Dragon Axe": makeAxe(75, 10),
+    "Infernal Axe": makeAxe(90, 12)
+}
