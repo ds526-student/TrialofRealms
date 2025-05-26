@@ -28,8 +28,8 @@
 
 3. More town interactions
     Add more shops
-        - magic 
-        - fletcher
+        - magic ✔️
+        - fletcher ✔️
         - pets
         - jewelry
 

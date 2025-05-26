@@ -1,3 +1,4 @@
+woodcutting ✔️
 fishing
 cooking
 mining

@@ -1,6 +1,7 @@
 import utils
 import skilling.woodCutting as woodCutting
 import game_data.skillsInfo as skillsInfo
+import skilling.fishing as fishing
 
 def skillsSelect():
     print("What skill would you like to train?")
@@ -19,6 +20,7 @@ def skillsSelect():
 
         skillMethodList = [
             woodCutting.treeSelect,
+            fishing.areaSelect,
         ]
 
-        skillMethodList[x - 1]()
+        skillMethodList[x]()
