@@ -52,14 +52,14 @@ axesDict = {
 
 
 
-# fishing areas = [areaName, levelRequired, fishChance]
+# fishing areas = [areaName, minLevel, maxLevel, fishChance]
 fishingAreas = [
-    ["Shallow Shores", 1, 75],          
-    ["Shrapnel River", 15, 80],     
-    ["Trench of Despair", 30, 70],
-    ["Lemvor Pier", 45, 70],
-    ["Open Waters", 60, 85],
-    ["Barren Ocean", 75, 90]
+    ["Shallow Shores", 1, 5, 75],          
+    ["Shrapnel River", 10, 20, 80],     
+    ["Trench of Despair", 30, 35, 70],
+    ["Lemvor Pier", 45, 50, 70],
+    ["Open Waters", 60, 75, 85],
+    ["Barren Ocean", 90, 99, 90]
 ]
 
 # creates a fish object
@@ -80,11 +80,26 @@ fishDict = {
     "Tuna": makeFish(35, 100, "Raw Tuna"),
     "Swordfish": makeFish(45, 150, "Raw Swordfish"),
     "Lobster": makeFish(50, 200, "Raw Lobster"),
-    "Cavefish": makeFish(62, 300, "Raw Cavefish"),
-    "Shark": makeFish(76, 500, "Raw Shark"),
+    "Cavefish": makeFish(60, 300, "Raw Cavefish"),
+    "Shark": makeFish(75, 500, "Raw Shark"),
     "Manta Ray": makeFish(90, 750, "Raw Manta Ray"),
     "Whale": makeFish(99, 1000, "Raw Whale")
 }
+
+fishNameArray = [
+    "Shrimp",
+    "Sardine",
+    "Herring",
+    "Trout",
+    "Salmon",
+    "Tuna",
+    "Swordfish",
+    "Lobster",
+    "Cavefish",
+    "Shark",
+    "Manta Ray",
+    "Whale"
+]
 
 # creates a fishingRod object
 def makeFishingRod(level_required, price, time_reduction, type="fishing rod"):

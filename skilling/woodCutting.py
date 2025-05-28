@@ -8,7 +8,7 @@ import game_data.skillsInfo as skillsInfo
 import inventory
 import skilling.skillsUtils as skillsUtils
 
-def calcXp(currentXp, xpEarned):
+def calcXp(currentXp, xpEarned, treeIndex=None):
     xpNeeded = xpToNextLevel()
     currentXp += xpEarned
     if currentXp >= xpNeeded:
@@ -21,20 +21,29 @@ def calcXp(currentXp, xpEarned):
 
 
     player.playerStats.woodCuttingXp = currentXp
-    utils.enter()
+    print("Press e to cut down another tree, or any key to return")
+    if msvcrt.getch().decode("utf-8") == "e":
+        woodCutting(treeIndex)
+    else:
+        return
 
 def xpToNextLevel():
     return math.floor(10 * (player.playerStats.woodCuttingLevel ** 1.4))
 
-def woodCutting(treeName, health, xp, logType):
+def woodCutting(arrayIndex):
+    treeName = skillsInfo.trees[arrayIndex][0]
+    treeHealth = skillsInfo.trees[arrayIndex][2]
+    xp = skillsInfo.trees[arrayIndex][3]
+    logType = skillsInfo.trees[arrayIndex][4]
+
     print("You have selected to cut down a " + treeName)
-    while health > 0:
+    while treeHealth > 0:
         randLetter = random.choice(string.ascii_lowercase)
         print("Press " + randLetter + " to cut down the tree")
         while True:
             x = msvcrt.getch()
             if x.decode("utf-8") == randLetter:
-                health -= player.playerStats.axeDamage
+                treeHealth -= player.playerStats.axeDamage
                 break
             else:
                 print("You pressed " + x.decode("utf-8") + " instead of " + randLetter)
@@ -45,7 +54,7 @@ def woodCutting(treeName, health, xp, logType):
     print("The tree has fallen")
     player.playerStats.inventory[logType]["amount"] += 1
     print(player.playerStats.inventory[logType]["amount"], logType + "s in your inventory")
-    calcXp(player.playerStats.woodCuttingXp, xp)
+    calcXp(player.playerStats.woodCuttingXp, xp, arrayIndex)
 
 def equipAxe():
     print("Select an axe to equip")
@@ -59,13 +68,19 @@ def equipAxe():
     )
 
 def treeSelect():
-    skillsUtils.areaSelect(
+    position = skillsUtils.areaSelect(
         method_name=treeSelect,
         initial_message="Select a tree to cut down",
         location_list=skillsInfo.trees,
-        equip_method=equipAxe,
         item_type="axe",
         item_name="axe",
         error_message="You are not a high enough level to cut down this tree",
-        next_method=woodCutting
+        next_method=woodCutting,
+        skill_level=player.playerStats.woodCuttingLevel,
+        equip_method=equipAxe
     )
+
+    if position is not None:
+        woodCutting(position)
+    else:
+        print("Returning to previous menu.")

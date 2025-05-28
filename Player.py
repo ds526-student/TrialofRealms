@@ -20,13 +20,20 @@ class playerStats:
     critHitDamage = 1.5
 
 
-    playerLevel = 50
+    playerLevel = 99
     playerXp = 0 
 
-    woodCuttingLevel = 1
+    woodCuttingLevel = 99
     woodCuttingXp = 0
     axe = "Wooden Axe"
     axeDamage = 1
+
+    fishingLevel = 99
+    fishingXp = 0
+    fishingRod = "Wooden Fishing Rod"
+    fishingRodTimeReduction = 0
+    minFishingTime = 3
+    maxFishingTime = 5
 
 
     maxLevel = 99
